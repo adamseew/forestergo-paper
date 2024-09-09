@@ -1,0 +1,217 @@
+
+\newcommand{\CLASSINPUTtoptextmargin}{54pt}
+\newcommand{\CLASSINPUTbottomtextmargin}{54pt}
+\newcommand{\CLASSINPUTinnersidemargin}{54pt}
+\newcommand{\CLASSINPUToutersidemargin}{54pt}
+
+\documentclass[letterpaper,10pt,conference,twoside]{IEEEtran}
+\IEEEoverridecommandlockouts 
+\def\IEEEtitletopspace{21pt}
+
+\usepackage[inline]{enumitem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage[font=footnotesize]{caption}
+\usepackage[font=footnotesize]{subcaption}
+\usepackage[noadjust]{cite}
+
+%% package for urls
+\usepackage{url}
+
+%% hyperref
+% and an override to make hyperref work with ieeetran.cls
+\makeatletter
+\let\NAT@parse\undefined
+\makeatother
+\usepackage[pagebackref=true,breaklinks=true,colorlinks,bookmarks=false]{hyperref}
+\makeatletter
+\newcommand*{\textlabel}[2]{%
+  \edef\@currentlabel{#1}% Set target label
+  \phantomsection% Correct hyper reference link
+  #1\label{#2}% Print and store label
+}
+\makeatother
+
+\usepackage{cleveref}[2012/02/15]% v0.18.4; 
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+\usepackage{textpos}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[scaled]{helvet}
+\usepackage{flushend}
+
+
+\AddToHook{shipout/foreground}{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[red,rotate=45,scale=10,opacity=0.2] at (current page.center) {\small\fontfamily{phv}\selectfont%};
+     IN~PREPARATION};
+%    UNDER~REVIEW};   
+  \end{tikzpicture}
+}
+
+%% correct bad hyphenation here
+\hyphenation{}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{assm}[thm]{Assumption}
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{defn}{Definition}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{pb}{Problem}[section]
+\newtheorem{rem}{Remark}
+\newtheorem{obs}{Observation}
+\newtheorem*{ctb}{Contribution}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\makeatletter
+\newcommand\notsotiny{\@setfontsize\notsotiny\@vipt\@viipt}
+\makeatother
+
+\renewcommand\citepunct{,\hspace*{.8ex}}
+\renewcommand*{\citedash}{--}
+
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+
+\title{\LARGE\bf Scaling Ergodic Control for Large-Scale Problems:\\Intra-Forest Exploration with a Moving Gaussian Mixture Model}
+
+\author{Adam Seewald, Ian Abraham, and Stefano Mintchev
+  \thanks{This work was partly supported by ETH Z{\"u}rich's World Food System Center and Yale University.}
+  \thanks{A.\hspace*{.4ex}S. and S.\hspace*{.4ex}M. are with the Department of Environmental Systems Science, ETH Z{\"u}rich, Switzerland. Email: {\tt\footnotesize \href{mailto:aseewald@ethz.ch}{aseewald@ethz.ch};}}
+  \thanks{I.\hspace*{.4ex}A. is with the Department of Mechanical Engineering and Materials Science, Yale University, CT, USA.}
+}
+
+\maketitle
+
+\vspace*{-.5cm}
+\begin{abstract} 
+\end{abstract}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\noindent
+\cite{seewald2022energy}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem Formulation}\label{sec:pb}
+%\IEEEpubidadjcol
+\noindent
+This work addresses the problem of exploring a bounded and potentially large-scale space, whereby large-scale we indicate spaces of orders of dozens or even hundred of meters in both lattitude and longitude. For practical reasons, we bound the exploration space, i.e., the space to be explored, to one hectare, and we condsider the exploration in two-dimensions. The formulation is such, however, that the state space might be potentially unbounded, and not limited to two dimensions~\cite{dong2023time}.
+
+Let us thus consider such bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in the space except for a finite number of obstacles represented by $\mathcal{O}\subset\mathcal{Q}$.  
+In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas while avoiding the obstacles $\mathcal{Q}\cap\mathcal{O}$ as opposed to other works on ergodic control in the literature~\cite{}.
+\begin{defn}[Ergodicity]
+  Given the bounded state space $\mathcal{Q}$ and a trajectory $\mathbf{x}(t)$, the trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} w.r.t. a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
+  \begin{equation}
+    \lim_{t\rightarrow\infty}{\int_{\mathcal{Q}}\phi(\mathbf{x})\Omega(\mathbf{x})\,d\mathbf{x}=\frac{1}{t}\int_{\mathcal{T}}{{\Omega\big(\overline{\mathbf{x}}(t)\big)}}\,dt},
+  \end{equation}
+  where $\overline{\,\cdot\,}$ is map that maps the state space to the exploration spaces, and $\Omega$ are all the Lebesgue function as defined in, e.g.,~\cite{}.
+\end{defn}
+
+The spatial distribution $\phi$ is built utilizing a Gaussian Mixture Model (GMM). 
+\begin{defn}[Moving GMM]
+  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in the GMM, whose initial probability is always zero. A \textit{moving GMM} is
+  \begin{equation}
+    \phi(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x}):=\sum_{i=1}^n{\alpha_i\,\mathcal{N}_i(\mathbf{x}\,|\,\mu_i,\Sigma_i)},
+  \end{equation}
+  where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the the covariance matrix and $\mu_i\in\mathcal{Q}$ the center of a Gaussian $\mathcal{N}_i$, i.e., a GMM with variable centers and mixing coefficients.
+  
+  Bold letters indicate vector, i.e., $\mathbf{x}\in\mathcal{Q}$ is the state space vector whereas $\boldsymbol{\alpha}\in\mathbb{R}_{>0}^n$, $\boldsymbol{\mu}\in\mathcal{Q}^n$ are the vectors compromising ideal probability and centers components respectively (see Section~\ref{sec:meth}).
+   
+\end{defn}
+
+An ergodic metric is a value that quantifies the ergodicity.
+\begin{defn}[Ergodic metric]
+  Consider a time average distribution of the trajecotry over a limited time window $t$, e.g.,
+  \begin{equation}
+    h\big(\mathbf{x}(t)\big):=\frac{1}{t}\int_\mathcal{T}\Delta\big((\mathbf{x})(t)\big)\,dt.
+  \end{equation}
+
+  $\Delta$ is defined as a Dirac delta function. An \textit{ergodic metric} is an $L^2$ inner prodact in between the average of the spatial and time distributions.
+\end{defn}
+
+\begin{pb}[Scaled ergodic control]\label{pb}
+  Given the state space and the obstacles space $\mathcal{Q}$ and $\mathcal{O}$ respectively, assume an initial GMM of size $n$ and probability zero is given. The \textit{scaled ergodic control} problem is the problem of finding the evolution of the components of the moving GMM, i.e., $\boldsymbol{\alpha}(t)$ and $\boldsymbol{\mu}(t)$ and of the control $\mathbf{u}(t)$ so that $\mathbf{x}(t)$ explores $\mathcal{Q}$ while avoiding $\mathcal{O}$ \textit{and}, the ergodic metric is minimized.
+\end{pb}
+
+We propose a solution to Problem~\ref{pb} and demostrate both by simulation and real-world experiment the feasibility of the solution, underlying the existence of trade-offs in between the accuracy and the exploration soundness in Sections~\ref{sec:res} and~\ref{sec:res} respectively.
+
+%%%%%%%%%%%%%%%%%%
+\section{Methods}\label{sec:meth}
+\noindent
+
+\subsection{Canonical ergodic control}
+
+\subsection{Scaled ergodic control}
+\label{sec:sol}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results}\label{sec:res}
+\noindent
+
+~ 
+\newpage
+
+~
+\newpage
+
+
+\begin{figure}[t!]
+  \centering
+  \begin{subfigure}[t]{\linewidth}
+  \hspace*{-.3cm}\input{figures/_steps_1.pdf_tex}
+  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \end{subfigure}
+  \begin{subfigure}[t]{\linewidth}
+  \hspace*{-.3cm}\input{figures/_steps_2.pdf_tex}
+  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \end{subfigure}
+  \begin{subfigure}[t]{\linewidth}
+  \hspace*{-.3cm}\input{figures/_steps_3.pdf_tex}
+  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \end{subfigure}
+  \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \label{fig:1}
+\end{figure}
+
+
+~ 
+\newpage
+
+~
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion and Future Directions}\label{sec:conc}
+\noindent
+
+
+{\small
+\bibliographystyle{IEEEtran} 
+\bibliography{forestergo}
+}
+
+\end{document}
+
