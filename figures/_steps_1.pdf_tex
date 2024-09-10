@@ -104,7 +104,7 @@
       \put(0.16327104,0.6268255){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{white}$\mu_5$\end{tabular}}}}%
     \put(0.16227104,0.6278255){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_5$\end{tabular}}}}%
     }
-    \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/steps_1.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/_steps_1.pdf}}%
     \put(0.23066632,0.48561244){\rotatebox{-37.45509884}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{blue}\tiny .2\end{tabular}}}}}%
     \put(0.23534825,0.60973186){\rotatebox{-52.14570349}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{blue}\tiny .2\end{tabular}}}}}%
     \put(0.20150801,0.56571256){\rotatebox{-31.32609813}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{blue}\tiny .2\end{tabular}}}}}%

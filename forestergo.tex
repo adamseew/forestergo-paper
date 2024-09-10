@@ -92,10 +92,10 @@
 
 \title{\LARGE\bf Scaling Ergodic Control for Large-Scale Problems:\\Intra-Forest Exploration with a Moving Gaussian Mixture Model}
 
-\author{Adam Seewald, Ian Abraham, and Stefano Mintchev
+\author{Adam Seewald${}^{\text{1}}$, Ian Abraham${}^{\text{2}}$, and Stefano Mintchev${}^{\text{1}}$
   \thanks{This work was partly supported by ETH Z{\"u}rich's World Food System Center and Yale University.}
-  \thanks{A.\hspace*{.4ex}S. and S.\hspace*{.4ex}M. are with the Department of Environmental Systems Science, ETH Z{\"u}rich, Switzerland. Email: {\tt\footnotesize \href{mailto:aseewald@ethz.ch}{aseewald@ethz.ch};}}
-  \thanks{I.\hspace*{.4ex}A. is with the Department of Mechanical Engineering and Materials Science, Yale University, CT, USA.}
+  \thanks{${}^{\text{1}}$A.\hspace*{.4ex}S. and S.\hspace*{.4ex}M. are with the Department of Environmental Systems Science, ETH Z{\"u}rich, Switzerland. Email: {\tt\footnotesize \href{mailto:aseewald@ethz.ch}{aseewald@ethz.ch};}}
+  \thanks{${}^{\text{2}}$I.\hspace*{.4ex}A. is with the Department of Mechanical Engineering and Materials Science, Yale University, CT, USA.}
 }
 
 \maketitle
@@ -109,68 +109,140 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \noindent
-\cite{seewald2022energy}
+.
 
+~
+\newpage
+
+~
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Formulation}\label{sec:pb}
 %\IEEEpubidadjcol
 \noindent
-This work addresses the problem of exploring a bounded and potentially large-scale space, whereby large-scale we indicate spaces of orders of dozens or even hundred of meters in both lattitude and longitude. For practical reasons, we bound the exploration space, i.e., the space to be explored, to one hectare, and we condsider the exploration in two-dimensions. The formulation is such, however, that the state space might be potentially unbounded, and not limited to two dimensions~\cite{dong2023time}.
+This work addresses the problem of exploring a bounded and potentially large-scale space, whereby large-scale we indicate spaces of orders of dozens or even hundred of meters in both x- and y-axis. For practical reasons, we bound the exploration space, i.e., the space to be explored, to one hectare, and we condsider the exploration in two-dimensions. The formulation is such, however, that the state space might be potentially unbounded, and not limited to two dimensions~\cite{dong2023time}.
 
 Let us thus consider such bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in the space except for a finite number of obstacles represented by $\mathcal{O}\subset\mathcal{Q}$.  
-In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas while avoiding the obstacles $\mathcal{Q}\cap\mathcal{O}$ as opposed to other works on ergodic control in the literature~\cite{}.
+In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas while avoiding the obstacles, i.e., $\mathcal{Q}\cap\mathcal{O}$, as opposed to other works on ergodic control in the literature where the exploration happens in areas of high information density instead~\cite{TODO}.
 \begin{defn}[Ergodicity]
-  Given the bounded state space $\mathcal{Q}$ and a trajectory $\mathbf{x}(t)$, the trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} w.r.t. a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
+  Given the bounded state space $\mathcal{Q}$, a trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} w.r.t. a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
   \begin{equation}
     \lim_{t\rightarrow\infty}{\int_{\mathcal{Q}}\phi(\mathbf{x})\Omega(\mathbf{x})\,d\mathbf{x}=\frac{1}{t}\int_{\mathcal{T}}{{\Omega\big(\overline{\mathbf{x}}(t)\big)}}\,dt},
   \end{equation}
-  where $\overline{\,\cdot\,}$ is map that maps the state space to the exploration spaces, and $\Omega$ are all the Lebesgue function as defined in, e.g.,~\cite{}.
+  where $\overline{\,\cdot\,}$ is a map that maps the state space to the exploration spaces, and $\Omega$ are all the Lebesgue function as defined in, e.g.,~\cite{TODO}.
 \end{defn}
 
 The spatial distribution $\phi$ is built utilizing a Gaussian Mixture Model (GMM). 
-\begin{defn}[Moving GMM]
-  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in the GMM, whose initial probability is always zero. A \textit{moving GMM} is
+\begin{defn}[Moving GMM]\label{def:movement}
+  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in a GMM, whose initial probability is equally distributed. A \textit{moving GMM} is
   \begin{equation}
     \phi(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x}):=\sum_{i=1}^n{\alpha_i\,\mathcal{N}_i(\mathbf{x}\,|\,\mu_i,\Sigma_i)},
   \end{equation}
-  where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the the covariance matrix and $\mu_i\in\mathcal{Q}$ the center of a Gaussian $\mathcal{N}_i$, i.e., a GMM with variable centers and mixing coefficients.
+  where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the the covariance matrix and $\mu_i\in\mathcal{Q}$ the center of a Gaussian $\mathcal{N}_i$, i.e., a GMM with variable centers $\boldsymbol{\mu}\in\mathcal{Q}^n$ and mixing coefficients $\boldsymbol{\alpha}\in\mathbb{R}_{>0}^n$.
   
-  Bold letters indicate vector, i.e., $\mathbf{x}\in\mathcal{Q}$ is the state space vector whereas $\boldsymbol{\alpha}\in\mathbb{R}_{>0}^n$, $\boldsymbol{\mu}\in\mathcal{Q}^n$ are the vectors compromising ideal probability and centers components respectively (see Section~\ref{sec:meth}).
+  Bold letters indicate vector, i.e., $\mathbf{x}\in\mathcal{Q}$ is the state space vector whereas $\boldsymbol{\alpha}$, $\boldsymbol{\mu}$ are the vectors compromising ideal GMM's probability and position components respectively (see Section~\ref{sec:meth}).
    
 \end{defn}
 
 An ergodic metric is a value that quantifies the ergodicity.
-\begin{defn}[Ergodic metric]
+\begin{defn}[Ergodic metric]\label{def:ergomet}
   Consider a time average distribution of the trajecotry over a limited time window $t$, e.g.,
   \begin{equation}
     h\big(\mathbf{x}(t)\big):=\frac{1}{t}\int_\mathcal{T}\Delta\big((\mathbf{x})(t)\big)\,dt.
   \end{equation}
-
-  $\Delta$ is defined as a Dirac delta function. An \textit{ergodic metric} is an $L^2$ inner prodact in between the average of the spatial and time distributions.
+  $\Delta$ is defined as a Dirac delta function. An \textit{ergodic metric} is an $L^2$-inner prodact in between the average of the spatial and time distributions.
 \end{defn}
 
 \begin{pb}[Scaled ergodic control]\label{pb}
-  Given the state space and the obstacles space $\mathcal{Q}$ and $\mathcal{O}$ respectively, assume an initial GMM of size $n$ and probability zero is given. The \textit{scaled ergodic control} problem is the problem of finding the evolution of the components of the moving GMM, i.e., $\boldsymbol{\alpha}(t)$ and $\boldsymbol{\mu}(t)$ and of the control $\mathbf{u}(t)$ so that $\mathbf{x}(t)$ explores $\mathcal{Q}$ while avoiding $\mathcal{O}$ \textit{and}, the ergodic metric is minimized.
+  Given the state space and the obstacles space $\mathcal{Q}$ and $\mathcal{O}$ respectively, assume the number of components $n$ of a GMM is given. The \textit{scaled ergodic control} problem is the problem of finding the evolution of the components of the moving GMM, i.e., $\boldsymbol{\alpha}(t)$ and $\boldsymbol{\mu}(t)$ and of the control $\mathbf{u}(t)\in\mathcal{U}$ so that $\mathbf{x}(t)$ explores $\mathcal{Q}$ while avoiding $\mathcal{O}$ \textit{and}, the ergodic metric is minimized.
 \end{pb}
 
-We propose a solution to Problem~\ref{pb} and demostrate both by simulation and real-world experiment the feasibility of the solution, underlying the existence of trade-offs in between the accuracy and the exploration soundness in Sections~\ref{sec:res} and~\ref{sec:res} respectively.
+We propose a solution to Problem~\ref{pb} and demostrate both by simulation and real-world experiment the feasibility of the solution, underlying the existence of trade-offs in between the accuracy and the exploration soundness in Sec.~\ref{sec:res} and~\ref{sec:res} respectively.
 
 %%%%%%%%%%%%%%%%%%
 \section{Methods}\label{sec:meth}
 \noindent
+This section details our methods. Sec.~\ref{sec:canon} introduces the concept of canonical ergodic control for exploration in bounded areas with an information density distribution. Sec.~\ref{sec:sol} describes our methodology of scaled ergodic control, i.e., ergodic control with a moving information density as a function of explored against unexplored space.
 
 \subsection{Canonical ergodic control}
+\label{sec:canon}
+\noindent
+To quantify the time average and the average of the spatial distributions $h$ and $\phi$ respectively, let us consider Fourier series basis functions~\cite{TODO}. For the time average distribtuion, the coefficients of an equivalent basis function can be expressed
+\begin{equation}\label{eq:ck}
+  c_k\big(\mathbf{x}(t)\big):=\int_{\mathcal{T}}{\prod_{d\in\{1,2\}}}{\cos{\big(2\pi k_d\mathbf{x}_d(\tau)/T\big)}/T^2}\,d\tau/t,
+\end{equation}
+where $T\in\mathbb{R}_{>0}$ is a given period. $\,\cdot\,_d$ indicates the $d$th item of a vector. %, so that $d$ iterates all the dimensions.
+
+Equation~(\ref{eq:ck}) expresses the cosine basis function for a coefficient $k$, i.e., we consider only the positive slice of the spectral domain and thus ignore the function's imaginary component. The coefficients $k\in\mathcal{K}$ depend on a given number of frequencies $\kappa\in\mathbb{N}_{>0}$ and are built so that $\mathcal{K}\in\mathbb{N}^2$ is a set of index vectors that cover the set $\kappa\times\cdots\times\kappa\in\mathbb{N}^{\kappa^2}$, i.e., the coefficients are evaluated on the entire domain.
+
+For the average of the spatial distribution, the coefficients of an equivalent basis function can be expressed similarly
+\begin{equation}\label{eq:phik}
+  \phi_k(\mathbf{x}):=\int_{\mathcal{Q}}{\sum_{d\in\{1,2\}}}{\phi(\mathbf{x})c(\mathbf{x})\,d\mathbf{x}},
+\end{equation}
+where $c$ is the integrand in Eq.~(\ref{eq:ck}) in the given point $\mathbf{x}$ at the current time step.
+
+The aim of an ergodic controller is to minimize an ergodic metric, i.e., the $L^2$-inner product of the distributions $h$ and $\phi$ (see Definition~\ref{def:ergomet}). A consolidated metric~\cite{TODO} for this purpose is, for instance
+\begin{equation}
+  \mathcal{E}(\mathbf{x}):=\sum_{k\in\mathcal{K}}{\Lambda_k(c_k-\phi_k)^2/2},
+\end{equation}
+where the coefficients of the time average and the average spatial distributions are expressed in Eq.~(\ref{eq:ck}--\ref{eq:phik}). $\Lambda_k$ is a weight factor that expresses which frequency has more weight, e.g., with %the factor
+\begin{equation}
+  \Lambda_k:=\frac{1}{\sqrt{\big(1+\lVert{k}\rVert^2\big)^3}},
+\end{equation}
+lower frequencies are to be preferred.
+
+Note that in Eq.~(\ref{eq:phik}) we have utilized the expression for a standard GMM. % instead of a moving GMM in Definition~\ref{def:movement}. 
+We utilize the expression of the moving GMM in the next section.
 
 \subsection{Scaled ergodic control}
 \label{sec:sol}
+\noindent
+To utilize the concept of moving information density as a function of explored against unexplored space, let us first consider Eq.~(\ref{eq:phik}) with the moving GMM from Definition~\ref{def:movement}.
 
+Let us assume for practical purposes that the space is square, with a given length $l\in\mathbb{R}_{>0}$ expressed in meters.
+Let us thus tight the period in Eq.~(\ref{eq:ck}) to such search space and express $l=T/2$. Eq.~\ref{eq:phik} can be expressed
+\begin{equation}
+  \phi_k(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x})\hspace*{-.6ex}:=\hspace*{-1ex}\int_{\mathcal{Q}}{\hspace*{-1ex}\Bigg(\hspace*{-.3ex}\sum_{d\in\{1,2\}}\hspace*{-.5ex}\sum_{i=1}^n\alpha_i\mathcal{N}_i\big(\mathbf{x\,|\,\overline{\rule{0pt}{2.4mm}{\mu_i}},\overline{\Sigma_i}}\big)\hspace*{-.5ex}\Bigg)\hspace*{-.1ex}c(\mathbf{x})\,d\mathbf{x}},
+\end{equation}
+where $\overline{\,\cdot\,}$ is map that maps the center and the covariance matrix to a symmetric state space delimited by $-l$ and $l$ by, e.g., using linear transformation matrices~\cite{calinon2020mixture}.
+
+Let us further define a given value that expresses the concept of ``history.'' If this value is expressed by, $h\in\mathbb{R}_{>0}$, we can model the concept of the ``already explored space'' exploting the definition of the moving GMM. The covariance matrix can be expressed
+\begin{equation}
+  \Sigma_i:=\frac{1}{2T}\int_\Upsilon\sum_{d\in\{1,2\}}{\big(\mathbf{x}_d(\tau)-\mu_i\big)}\,d\tau,
+\end{equation}
+where the trajectory is being evaluated within the history, i.e., $\Upsilon$ indicates the time interval in betweeen $t$ and $t-h$.
+%
+The centers can be then expressed as $\mu_i:=E\big(\mathbf{x}(t)\big)$ with $E$ being the expected value of $\mathbf{x}$ on $\Upsilon$. 
+
+The scaled ergodic control problem can then be expressed as the problem of finding an ergodic controller that visit the inverse of the probability distribution represented by the moving GMM, thus avoiding areas ``already visited,'' within a given history window $h$. The problem posed in this way, however, produces trajectories that require an additional obstacle avoidance methodology, such as~\cite{lerch2023safety}.
+
+Let us thus consider a modified expression for the center of the gaussian $\mu_i:=E\big(\mathbf{x}(t)\big)-e_i$ where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ is a displacement that allow to ``move'' the Gaussian components in the moving GMM. 
+
+Our methodology is such that the scaled ergodic controller finds the minimum displacement of the Gaussians so that the the space to be visited is delimited by $\mathcal{Q}\cap\mathcal{O}$. Such controller can be expressed
+\begin{subequations}\begin{align}
+  \min_{\Theta}%\int_{\mathcal{T}}\mathbf{u}(\tau)^TR\mathbf{u}(\tau)\,d\tau+
+  \mathcal{E}&(\mathbf{x})+\Psi(\mathbf{e}),\label{eq:cost}\\
+  \text{s.t. }\dot{\mathbf{x}}&=f(\mathbf{x}(t),\mathbf{u}(t)),\label{eq:dyn}\\
+  \mathbf{x}&(t)\in\mathcal{Q}\cap\mathcal{O},\,\mathbf{u}(t)\in\mathcal{U},\\
+  \mathbf{x}&(t_0),n,\kappa,l,h,\text{ are given},\label{eq:ocpconsttotf}
+\end{align}\end{subequations}
+where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the moving GMM along the control and the state. The function $\Psi$ maps the displacement to a cost value, e.g., $\Sigma_{e_i\in\mathbf{e}}|e_i|$, where $|\hspace{.2ex}\cdot\hspace{.2ex}|$ is the defined as an $L^2$-norm.
+
+The dynamics in Eq.~(\ref{eq:dyn}) is a 2D single integrator system, which mimics the behaviour of a real UAV in out experimental setup to a reasonable extent (see Sec.~\ref{sec:res}).
+
+The problem is formulated to find the optimal control, displacement, and probability for each Gaussian, ensuring that the displacement and probability deviate minimally from the ideal case, n.b., here the Gaussians represent the history of the explored space. For practical purposes, a given horizon $N \in \mathbb{N}_{>0}$ is defined, and the optimization is reiterated for each horizon using a methodology similar to an MPC controller, i.e., $\mathcal{T}$ in Eq.~(\ref{eq:ck}) is the interval in between $t$ and $t-N$.
+
+The large-scale exploration is considered concluded when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to set up the problem so that the exploration does not terminate or lasts for long-term, such as in~\cite{seewald2022energy}.
+
+Other practical considerations, such as the choice of the history and the size of the moving GMM, are detailed in the next section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results}\label{sec:res}
 \noindent
+.
 
-~ 
+~
 \newpage
 
 ~
@@ -180,15 +252,15 @@ We propose a solution to Problem~\ref{pb} and demostrate both by simulation and 
 \begin{figure}[t!]
   \centering
   \begin{subfigure}[t]{\linewidth}
-  \hspace*{-.3cm}\input{figures/_steps_1.pdf_tex}
+  \hspace*{-.15cm}\input{figures/_steps_1.pdf_tex}
   \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
   \end{subfigure}
   \begin{subfigure}[t]{\linewidth}
-  \hspace*{-.3cm}\input{figures/_steps_2.pdf_tex}
+  \hspace*{-.15cm}\input{figures/_steps_2.pdf_tex}
   \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
   \end{subfigure}
   \begin{subfigure}[t]{\linewidth}
-  \hspace*{-.3cm}\input{figures/_steps_3.pdf_tex}
+  \hspace*{-.15cm}\input{figures/_steps_3.pdf_tex}
   \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
   \end{subfigure}
   \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
@@ -206,7 +278,7 @@ We propose a solution to Problem~\ref{pb} and demostrate both by simulation and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion and Future Directions}\label{sec:conc}
 \noindent
-
+.
 
 {\small
 \bibliographystyle{IEEEtran} 
