@@ -1,0 +1,121 @@
+%% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'figures/__steps_1.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{258.20884514bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.83783135)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \footnotesize
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/__steps_1.pdf}}%
+    \put(0.41646191,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.52234956,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}12\end{tabular}}}}%
+    \put(0.63491782,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}24\end{tabular}}}}%
+    \put(0.74748607,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36\end{tabular}}}}%
+    \put(0.86005433,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}48\end{tabular}}}}%
+    \put(0.97262258,0.02549887){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/__steps_1.pdf}}%
+    \put(0.38709844,0.05366){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.37373723,0.16622826){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}12\end{tabular}}}}%
+    \put(0.37373723,0.27879651){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}24\end{tabular}}}}%
+    \put(0.37373723,0.39136477){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36\end{tabular}}}}%
+    \put(0.68885522,-0.00442709){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x (m)\end{tabular}}}}%
+    \put(0.17263649,-0.00442974){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize x (m)\end{tabular}}}}%
+    \put(0.00747672,0.17597293){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize y (m)\end{tabular}}}}}%
+    \put(0.00747111,0.46757135){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize y (m)\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/__steps_1.pdf}}%
+    {\scriptsize 
+    \put(0.06669171,0.02654913){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.1139911,0.02654913){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}12\end{tabular}}}}%
+    \put(0.16768234,0.02654913){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}24\end{tabular}}}}%
+    \put(0.22137357,0.02654913){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36\end{tabular}}}}%
+    \put(0.27506479,0.02654913){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}48\end{tabular}}}}%
+    \put(0.32875601,0.02654912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
+    }
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{figures/__steps_1.pdf}}%
+    {
+    \scriptsize
+    \put(0.02322389,0.40835473){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}12\end{tabular}}}}%
+    \put(0.03601308,0.35590761){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.03544327,0.0602846){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.02265965,0.11397665){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}12\end{tabular}}}}%
+    \put(0.02265965,0.16766871){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}24\end{tabular}}}}%
+    \put(0.02265965,0.22136076){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36\end{tabular}}}}%
+    \put(0.02265965,0.2750409){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}48\end{tabular}}}}%
+    \put(0.02265965,0.32873295){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
+    \put(0.02324325,0.4620607){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}24\end{tabular}}}}%
+    \put(0.02324325,0.51575275){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}36\end{tabular}}}}%
+    \put(0.02324325,0.56943289){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}48\end{tabular}}}}%
+    \put(0.02324325,0.62312494){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/__steps_1.pdf}}%
+    \put(0.4865107,0.61433019){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_1$\end{tabular}}}}%
+    \put(0.4845107,0.61533019){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_1$\end{tabular}}}}%
+    \put(0.51748441,0.53186662){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_2$\end{tabular}}}}%
+    \put(0.51548441,0.53286662){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_2$\end{tabular}}}}%
+    \put(0.5860028,0.59000349){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_3$\end{tabular}}}}%
+    \put(0.5840028,0.59100349){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_3$\end{tabular}}}}%
+    \put(0.50169257,0.67377203){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_4$\end{tabular}}}}%
+    \put(0.49969257,0.67477203){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_4$\end{tabular}}}}%
+    \put(0.48246854,0.78746722){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_5$\end{tabular}}}}%
+    \put(0.48046854,0.78846722){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_5$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{figures/__steps_1.pdf}}%
+    \put(0.60050524,0.54203564){\rotatebox{-34.45509655}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{white} 0.2\end{tabular}}}}}%
+    \put(0.59850524,0.54303564){\rotatebox{-34.45509655}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{blue} 0.2\end{tabular}}}}}%
+    \put(0.60858533,0.75624119){\rotatebox{-53.14570524}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{white} 0.2\end{tabular}}}}}%
+    \put(0.60658533,0.75724119){\rotatebox{-53.14570524}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{blue} 0.2\end{tabular}}}}}%
+    \put(0.55018379,0.68027259){\rotatebox{-31.32609952}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{white} 0.2\end{tabular}}}}}%
+    \put(0.54818379,0.68127259){\rotatebox{-31.32609952}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{blue} 0.2\end{tabular}}}}}%
+    \put(0.5394091,0.74426806){\rotatebox{-64.18259784}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{white} 0.4\end{tabular}}}}}%
+    \put(0.5374091,0.74526806){\rotatebox{-64.18259784}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{blue} 0.4\end{tabular}}}}}%
+    \put(0.57252768,0.7326809){\rotatebox{59.46280298}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{white} 0.6\end{tabular}}}}}%
+    \put(0.57052768,0.7316809){\rotatebox{59.46280298}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\tiny\color{blue} 0.6\end{tabular}}}}}%
+    }
+  \end{picture}%
+\endgroup%
