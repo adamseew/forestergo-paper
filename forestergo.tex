@@ -53,7 +53,7 @@
 \AddToHook{shipout/foreground}{
   \begin{tikzpicture}[remember picture,overlay]
     \node[red,rotate=45,scale=10,opacity=0.2] at (current page.center) {\small\fontfamily{phv}\selectfont%};
-    IN~PREPARATION
+%    IN~PREPARATION
 %    UNDER~REVIEW
 };   
   \end{tikzpicture}
@@ -101,13 +101,13 @@
 
 \maketitle
 
-\vspace*{-.5cm}
+%\vspace*{.5cm}
 \begin{abstract}
   The problem of exploring unknown and large-scale spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers often encounter limitations when applied to large-scale problems. This paper introduces a general and scaled ergodic control methodology designed to overcome these limitations. Unlike traditional ergodic controllers that rely on predefined information measures or separate obstacle avoidance, our approach dynamically generates and refines the information measure from sensory data and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including dense vegetation and agricultural settings, demonstrate the effectiveness of our scaled general ergodic control, showcasing the applicability of our methodology compared to conventional techniques typically restricted to structured or small-scale only.
 \end{abstract}
 
 
-
+\IEEEpubidadjcol
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \noindent
@@ -129,6 +129,7 @@ In contrast to existing ergodic control methodologies that require external obst
 %
 The underlying information measure is represented utilizing a Gaussian Mixture Model (GMM), which is refined from the sensory data as the robot traverses the state space -- a process that is handled by our methodology and that does not require any user input. Our ergodic formulation is different from existing methods. The problem is posed so that the robot spends time in areas with low information measures, whereas the ``explored space'' is related to high information measures. The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window.
 
+\IEEEpubidadjcol
 Existing ergodic controllers have been studied from the point of view of time~\cite{dong2023time} and energy~\cite{seewald2024energy,naveed2024eclares} optimality and applied to a multitude of use cases. These use cases include tactile sensing~\cite{abraham2017ergodic}, active learning~\cite{abraham2021ergodic}, multi-objective optimality~\cite{ren2023pareto,srinivasan2023multi}, grasping and manipulation~\cite{shetty2022ergodic,bilaloglu2023whole}, and visual rendering~\cite{low2022drozbot,prabhakar2020autonomous}. Ergodic controllers in the literature feature diverse aspects such as stochastic dynamics~\cite{torre2016ergodic,ayvali2017ergodic} and multi-agent and/or swarm control with both centralized~\cite{seewald2024energy,rao2024learning} and distributed information processing~\cite{prabhakar2020ergodic,coffin2022multi}. Although some of these use cases involve information gathering~\cite{dressel2018optimality} and feature urban environments and other potentially large-scale problems~\cite{prabhakar2020ergodic,rao2023multi}, a generic large-scale ergodic controller has not been studied yet. Even though recent methods have been making progress in this direction~\cite{whittemeyer2023bi,seewald2024energy,naveed2024eclares,dong2023time}, these methods do not scale efficiently due to the formulation of the underlying optimization and/or require an a priori information measure. From an obstacle avoidance perspective, even though there are ergodic controllers that feature obstacle avoidance~\cite{lerch2023safety}, this is an external component on top of the ergodic controller that then results in a sub-ergodic solution~\cite{dong2023time} rather than an integral component of the explorer itself.
 
 We showcase our general and scaled ergodic control on a large-scale problem: the problem of exploring a simulated forest and an outdoor area that has both dense vegetation and an agricultural setting, in contrast to existing ergodic control methodologies that are demonstrated in structured environments or generally in small-scale only. Section~\ref{sec:res} shows the performance of our methods. The open-source software stack to replicate our approach and the experimental data are made available on our project repository webpage\footnote{\href{https://github.com/adamseew/scaledergo}{\tt github.com/adamseew/scaledergo}}.
@@ -138,7 +139,6 @@ The remainder of this paper is structured as follows. Sec.~\ref{sec:pb} provides
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Formulation}\label{sec:pb}
-%\IEEEpubidadjcol
 \noindent
 This work addresses the problem of exploring a bounded and potentially large-scale space, where ``large-scale'' refers to spaces on the order of dozens or even hundreds of meters in both the x- and y-axes. For practical reasons, we restrict the exploration space to one hectare and consider exploration in two dimensions. However, the formulation is such that the state space could potentially be unbounded and not limited to two dimensions~\cite{dong2023time}.
 
@@ -230,26 +230,24 @@ We use the expression for the moving GMM defined in Definition~\ref{def:movement
 \subsection{Scaled ergodic control}
 \label{sec:sol}
 \noindent
-To utilize the concept of moving information density as a function of explored against unexplored space, let us first consider Eq.~(\ref{eq:phik}) with the moving GMM.
+To utilize the concept of moving information density as a function of explored versus unexplored space, let us first consider Eq.~(\ref{eq:phik}) with the moving GMM.
 
-Let us assume for practical purposes that the space is square, with a given length $l\in\mathbb{R}_{>0}$ expressed in meters.
-Let us thus tight the period in Eq.~(\ref{eq:ck}) to such search space and express $l=T/2$. Eq.~(\ref{eq:phik}) can be then also expressed
+Assume for practical purposes that the space is square, with a given length $l\in\mathbb{R}_{>0}$ expressed in meters. We then restrict the period in Eq.~(\ref{eq:ck}) to this search space and express $l$ as $T/2$. Eq.~(\ref{eq:phik}) can also be expressed as 
 \begin{equation}
   \phi_k(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x})\hspace*{-.6ex}:=\hspace*{-1ex}\int_{\mathcal{Q}}{\hspace*{-1ex}\Bigg(\hspace*{-.3ex}\sum_{d\in\{1,2\}}\hspace*{-.5ex}\sum_{i=1}^n\alpha_i\mathcal{N}_i\big(\mathbf{x\,|\,\overline{\rule{0pt}{2.4mm}{\mu_i}},\overline{\Sigma_i}}\big)\hspace*{-.5ex}\Bigg)\hspace*{-.1ex}c(\mathbf{x})\,d\mathbf{x}},
 \end{equation}
-where $\overline{\,\cdot\,}$ is a map that maps the center and the covariance matrix to a symmetric state space delimited by $-l$ and $l$ by, e.g., using linear transformation matrices~\cite{calinon2020mixture}.
+where $\overline{\,\cdot\,}$ is a map that maps the center and the covariance matrix to a symmetric state space delimited by $-l$ and $l$, e.g., a map that uses linear transformation matrices~\cite{calinon2020mixture}.
 
-Let us further define a given value that expresses the concept of ``history.'' If this value is expressed by, $h\in\mathbb{R}_{>0}$, we can model the space that has been already explored by the robot exploting the definition of the moving GMM. The covariance matrix can be expressed
+We further define a value that represents the concept of ``history.'' If this value is expressed by $h\in\mathbb{R}_{>0}$, we can model the space that has already been explored by the robot using the definition of the moving GMM. The covariance matrix can be expressed as 
 \begin{equation}
   \Sigma_i:=\frac{1}{2T}\int_\Upsilon\sum_{d\in\{1,2\}}{\big(\mathbf{x}_d(\tau)-\mu_i\big)}\,d\tau,
 \end{equation}
-where the trajectory is being evaluated within the history, i.e., $\Upsilon$ indicates the time interval in betweeen $t$ and $t-h$.
-%
-The centers can be then expressed as $\mu_i:=E\big(\mathbf{x}(t)\big)$ with $E$ being the expected value of $\mathbf{x}$ on $\Upsilon$. 
+where the trajectory is evaluated within the history, i.e., $\Upsilon$ indicates the time interval between $t$ and $t-h$.
 
-The scaled ergodic control problem can then be expressed as the problem of finding an ergodic controller that visit the inverse of the probability distribution represented by the moving GMM, thus avoiding areas ``already visited,'' within a given history window $h$. The problem posed in this way, however, produces trajectories that require an additional obstacle avoidance methodology, such as~\cite{lerch2023safety}.
+The centers can then be expressed as $\mu_i:=E\big(\mathbf{x}(t)\big)$, with $E$ being the expected value of $\mathbf{x}$ on $\Upsilon$. 
 
-Let us thus consider a modified expression for the center of the gaussian $\mu_i:=E\big(\mathbf{x}(t)\big)-e_i$ where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ is a displacement that allow to ``move'' the Gaussian components in the moving GMM. 
+The scaled ergodic control problem is thus framed as finding an ergodic controller that targets the inverse of the probability distribution represented by the moving GMM, thereby avoiding areas “already visited” within a given history window $h$. However, this formulation may produce trajectories that require an additional obstacle avoidance methodology, such as~\cite{lerch2023safety}.
+
 
 \begin{figure}[t!]
   \begin{minipage}[t!]{.25\columnwidth}
@@ -264,7 +262,13 @@ Let us thus consider a modified expression for the center of the gaussian $\mu_i
   \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
 \end{figure}
 
-Our methodology is such that the scaled ergodic controller finds the minimum displacement of the Gaussians so that the the space to be visited is delimited by $\mathcal{Q}\cap\mathcal{O}$. Such controller can be expressed with the optimal control problem (OCP)
+Let us consider a modified expression for the center of the Gaussian
+\begin{equation}
+  \mu_i:=E\big(\mathbf{x}(t)\big)-e_i
+\end{equation}
+where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ represents a displacement that allows for ``moving'' the Gaussian components in the moving GMM.
+
+Our methodology ensures that the scaled ergodic controller determines the minimum displacement of the Gaussians so that the space to be visited is delimited by $\mathcal{Q}\,\,\cap\,\,\mathcal{O}$. This controller can be formulated as an optimal control problem (OCP) 
 \begin{subequations}\label{eq:ocp}\begin{align}
   \min_{\Theta}%\int_{\mathcal{T}}\mathbf{u}(\tau)^TR\mathbf{u}(\tau)\,d\tau+
   \mathcal{E}&(\mathbf{x})+\Psi(\mathbf{e}),\label{eq:cost}\\
@@ -272,24 +276,30 @@ Our methodology is such that the scaled ergodic controller finds the minimum dis
   \mathbf{x}&(t)\in\mathcal{Q}\cap\mathcal{O},\,\mathbf{u}(t)\in\mathcal{U},\label{eq:const}\\
   \mathbf{x}&(t_0),n,\kappa,l,h,\text{ are given},\label{eq:ocpconsttotf}
 \end{align}\end{subequations}
-where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the moving GMM along the control and the state. The function $\Psi$ maps the displacement to a cost value, e.g., $\Sigma_{e_i\in\mathbf{e}}|e_i|$, where $|\hspace{.2ex}\cdot\hspace{.2ex}|$ is the defined as an $L^2$-norm.
+where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the moving GMM, as functions of the control and the state. The function $\Psi$ maps the displacement to a cost value, e.g., 
+\begin{equation}
+  \Psi(\mathbf{e}):=\sum_{e_i\in\mathbf{e}}|e_i|,
+\end{equation}
+where $|\hspace{.2ex}\cdot\hspace{.2ex}|$ is defined as an $L^2$-norm.
 
-The dynamics in Eq.~(\ref{eq:dyn}) is a 2D single integrator system, which mimics the behaviour of an unmanned aerial vehicle (UAV) in our experimental setup to a reasonable extent (see Sec.~\ref{sec:res}).
+The dynamics in Eq.~(\ref{eq:dyn}) represent a 2D single integrator system, which approximates the behavior of an unmanned aerial vehicle (UAV) in our experimental setup to a reasonable extent (see Sec.~\ref{sec:res}).
 
-The problem is formulated so that it finds displacement, and probability for each Gaussian and the optimal (i.e., ergodic) control, ensuring that the displacement and probability deviate minimally from the ideal case. Note once again that here the Gaussians represent the history of the explored space. For practical purposes, a given horizon $N \in \mathbb{N}_{>0}$ is defined, and the optimization is reiterated for each horizon using a methodology similar to an MPC controller, i.e., $\mathcal{T}$ in Eq.~(\ref{eq:ck}) is the interval in between $t$ and $t-N$ ($N$ is not to be confused with the history window $h$).
+The problem is formulated to determine the displacement and probability for each Gaussian and the optimal (i.e., ergodic) control, ensuring that the displacement and probability deviate minimally from the ideal case. Note that the Gaussians represent the history of the explored space. For practical purposes, a defined horizon $N \in \mathbb{N}_{>0}$ is used, and the optimization is iterated for each horizon using a methodology similar to an MPC controller, where $\mathcal{T}$ in Eq.~(\ref{eq:ck}) denotes the interval between $t$ and $t-N$ (with $N$ not to be confused with the history window $h$).
 
-The large-scale exploration is considered concluded when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to set up the problem so that the exploration does not terminate or lasts for long-term, such as in~\cite{seewald2022energy}.
+Large-scale exploration is considered complete when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to configure the problem so that exploration continues indefinitely or for extended periods, as discussed in~\cite{seewald2022energy}. %TODO!
 
-Other practical considerations, such as the choice of the history and the size of the moving GMM, are detailed in the next section.
+Additional practical considerations, such as the choice of history and the size of the moving GMM, are detailed in the next section.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results}\label{sec:res}
 \noindent
 This section provides an overview of our experimental setup and showcases the results. 
-Experiments are implemented utilizing \textsc{Matlab}~(R), whereas interfaces for physical experimental evaluation are aided by a rutine implemented in Python. 
-The MPC optimization stack, i.e., the solver that solves the OCP in Eq.~(\ref{eq:ocp}), relies on two external open-source components. The non-linear programming solver IPOPT~\cite{wachter2006implementation} and the algorithmic differentiation library CasADi~\cite{andersson2012casadi}.
+Experiments are conducted using \textsc{Matlab}~(R), while interfaces for physical experimental evaluation are supported by a routine implemented in Python. The MPC optimization stack, which solves the OCP in Eq.~(\ref{eq:ocp}), relies on two external open-source components: the non-linear programming solver IPOPT~\cite{wachter2006implementation} and the algorithmic differentiation library CasADi~\cite{andersson2012casadi}.
 
-In the following, Sec.~\ref{sec:res1} describes experimental results, a simulated forest with an area of 3~600 squared meteres. Sec.~\ref{sec:res2} details our finding in terms of built-in obstacle avoidance capabilities against coverage of our general scaled ergodic controller. Sec.~\ref{sec:res3} describes our otdoor modeled results, consisting of an area with both dense vegetation and an agricultural setting, compromising multiple obstacles and a total area of 10~000 squared meters.
+In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest with an area of 3~600~square~meters. Sec.~\ref{sec:res2} details our findings regarding the built-in obstacle avoidance capabilities of our general scaled ergodic controller compared to its coverage performance. Sec.~\ref{sec:res3} describes the outdoor modeled results, featuring an area with both dense vegetation and an agricultural setting, including multiple obstacles and a total area of 10~000 square meters.
 
 \begin{figure}[t!]
   \centering
@@ -314,16 +324,22 @@ In the following, Sec.~\ref{sec:res1} describes experimental results, a simulate
   \label{fig:1}
 \end{figure}
 
+
+
+
 \subsection{Simulated forest}\label{sec:res1}
 \noindent
-Simulated results are condacted in a forest with 45 trees spread randomly in area of 3~600 squared meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time step, when a desired coverage treshold is achieved within a certain approximation (i.e., 60\%~+/-5\%). The number of Gaussians $n$ is set to five, whereas the initial poition is set to the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, which in line with other ergodic controllers in the literature~\cite{seewald2022energy}. 
+Simulated results are conducted in a forest with 45 trees randomly distributed across an area of 3~600 square meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time steps when a desired coverage threshold is achieved within a specified approximation (i.e., 60\%~$\pm$5\%). The number of Gaussians $n$ is set to five, with the initial positions centered in the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, consistent with other ergodic controllers in the literature~\cite{seewald2022energy}. %todo
 
-Fig.~\ref{fig:1} shows the results for the simulated forest at tree distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (right of the figure) after 1~000 time steps. The history is illustrated with the dark-red line and the current point with the dark-red dot. The top-left of the figure shows the underlying information density distribution (i.e., the moving GMM in Definition~\ref{def:movement}) with a detail of the five Gaussian components in the area that represents the current history interval. The optimal value of the Gaussians centers $\boldsymbol{\mu}$ and of the mixing coefficients $\boldsymbol{\alpha}$ are such that the moving GMM represents the hisotory (i.e., the expected value and the covariance of the trajectory on the current history window) and that the Gaussians are deviated as little as possible to avoid the obstacles.
-The bottom-left of the figure shows the coverage map, where each square counts the number of points in within the square in a given time.
+Fig.~\ref{fig:1} presents the results for the simulated forest at distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (on the right) after 1~000 time steps. The history is illustrated with a dark red line, and the current point is marked by a dark red dot. The top-left of the figure depicts the underlying information density distribution (i.e., the moving GMM from Definition~\ref{def:movement}), including a detail of the five Gaussian components in the area representing the current history interval. The optimal values of the Gaussian centers $\boldsymbol{\mu}$ and the mixing coefficients $\boldsymbol{\alpha}$ ensure that the moving GMM represents the history (i.e., the expected value and covariance of the trajectory over the current history window) while minimizing deviation to avoid obstacles. The bottom-left of the figure displays the coverage map, where each square counts the number of points within it at a given time.
 
-Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV keeps flying through the obstacles, exploring further the state space. The moving GMM is then shown on the top-right, whereas the coverage map is shown at the bottom-right.
+Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV continues navigating through the obstacles, further exploring the state space. The moving GMM is shown on the top right, and the coverage map is displayed at the bottom right.
 
-Fig.~\ref{fig:1-3} shows the trajecotry at time instant 10~000. Similarly to the previous figures, the moving GMM model and the coverage are illustrated at the top-left and bottom-left respectively. One can notice that while the obstacles are overally avoided, the simulated UAV come close or even passes through the obstacles at times. We report a relation in between the degree of obstacle avoidance capabilities and the coverage, as discussed in the next section.
+Fig.~\ref{fig:1-3} shows the trajectory at time instant 10~000. As with the previous figures, the moving GMM model and coverage map are illustrated at the top-left and bottom-left, respectively. It is observed that while the obstacles are generally avoided, the simulated UAV occasionally comes close to or passes through obstacles. A relationship between the degree of obstacle avoidance and coverage is reported, as discussed in the following section.
+
+
+
+
 
 \begin{figure}[t!]
   \begin{minipage}[t!]{.67\columnwidth}
@@ -340,20 +356,19 @@ Fig.~\ref{fig:1-3} shows the trajecotry at time instant 10~000. Similarly to the
 
 \subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
 \noindent
-The OCP posed as Eq.~(\ref{eq:ocp}) have no optimal solution. In this scenario, our algorithm is such that a sub-optimal solution is returned, where the constraint expressed in Eq.~(\ref{eq:const}) is not respected, e.g., the simulated trees in Sec.~\ref{sec:res1} are not avoided with the desired treshold. 
-While we found this behavior happening in an initial iteration of our scaled ergodic methodology, we have noticed that we can tune have well we can avoid the obstacles as a by-product of our approach utilizing the concept of history $h$. 
+The OCP formulated in Eq.~(\ref{eq:ocp}) may not always yield an optimal solution. In such cases, our algorithm provides a sub-optimal solution where the constraint in Eq.~(\ref{eq:const}) may not be fully respected. For example, in the simulated trees scenario described in Sec.~\ref{sec:res1}, obstacles may not be avoided within the desired threshold. We observed this behavior during the initial iterations of our scaled ergodic methodology. However, by tuning our approach using the concept of history $h$, we can improve obstacle avoidance as a by-product of our method.
 
-Fig.~\ref{fig:0} resports our experimental results in terms of built-in obstacle avoidance capabilities against coverage and a collision metric, underlying the trade-offs in between these metrics. The collision metric $e_c$ is built so that every occurence of a point that invalidates the constraint in Equation~(\ref{eq:const}) within a given treshold is counted. The actual count of occurences is then reported on the left y-axis of the figure, with the horizon being set to 50~000, i.e., the actual invalidation ratio for a history window set to zero is solely 0.044 \%, whereas is up an order of magnitude higher for a history window set to 1~000 (0.46 \%). In all the experiments, the treshold is set to 60 centimeters.
-The coverage is calculated in the same way as reported in Sec.~\ref{sec:res1}. It is to be noted that full coverage is not achieved, as obstcles are also counted in the overall coverage metric.
+Fig.~\ref{fig:0} presents our experimental results, highlighting the trade-offs between built-in obstacle avoidance capabilities and coverage, along with a collision metric. The collision metric $c_e$ is designed to count every occurrence where a point violates the constraint in Eq.~(\ref{eq:const}) within a given threshold. The count of violations is shown on the left y-axis of the figure. With a horizon set to 50~000, the invalidation ratio for a history window of zero is only 0.044\%, whereas it increases to 0.46\% for a history window of 1~000. The threshold for invalidation is set to 60 centimeters. Coverage is calculated as described in Sec.~\ref{sec:res1}. Note that full coverage is not achieved since obstacles are included in the overall coverage metric.
 
-The top of the figure reports the three metrics on a logarithmic scale. Here we have noticed that a history window set to 100 provides the best trade-off in terms of obstacle avoidance (i.e., 0.14 \%) and coverage metrics. The bottom of the figure the shows a detail of the history window around~100, +/-25.
+The top of the figure shows the three metrics on a logarithmic scale. We observed that a history window of 100 provides the best trade-off between obstacle avoidance (0.14\%) and coverage metrics. The bottom of the figure displays a detailed view of the history window around 100, $\pm$25.
 
 \subsection{Outdoors model}\label{sec:res3}
 \noindent
-Additional experimental evaluation is derived utilizing a model of an outdoors vegetated area situated in Birmensdorf ZH, Switzerland. The orgin is set to 47.362646, 8.457228 in longitude and latitude coordinates. The area has been chosen so that it contains both dense vegetation and an agricultural setting, which mimics a potential real-world use case for our general scaled ergodic controller. The overall area being explored is bounded to 10~000 square meters and its surrounding has been surveyed manually to explore potential future feasibility.
+Additional experimental evaluation is conducted using a model of an outdoor vegetated area located in Birmensdorf, ZH, Switzerland, with coordinates 47.362646\textdegree latitude and 8.457228\textdegree longitude. The area was selected to include both dense vegetation and an agricultural setting, simulating a real-world use case for our general scaled ergodic controller. The exploration area is bounded to 10~000 square meters, and the surrounding region has been manually surveyed to assess future feasibility.
 
-Fig.~\ref{fig:2} reports the path whereas the history is illustrated with the dark-red line and the current point with the dark-red dot. The history is set to 150 time steps and the dynamics in Eq.~(\ref{eq:dyn}) is adjasted so that the model mimics the UAV, a DJI Mavic 3 reasonably. The history is choosen so that the obstacles are avoided, i.e., the UAV avoids the truncs even though it is still able to fly in-within the vegetation. The physical experimental evaluation has been conducated on just an initial slice of the overall trajectory, demonstrating the eventual feasibility of the method in terms of utilizing ergodic controllers but the actual path is derived \textsc{Matlab} (R). Further physical evaluation is currently being evaluated (see Sec.~\ref{sec:conc}). The exploratory trajectories are imported into the UAV's flight controller utilizing waypoints, which is handled by a proprietary software component; but portability with other software components and flight controllers is supported. 
-The data are reported after a horizon of 5~000 time steps. The obstacles are placed so that the UAV travels in within the canopy, at an altitude of 2.5 meters. Which means that small bushes are not counted whereas tree truncs are. The velocity is set to 1.5 meters per second.
+Fig..~\ref{fig:2} illustrates the path taken, with the history represented by the dark-red line and the current point marked by the dark red dot. The history is set to 150 time steps, and the dynamics in Eq.~(\ref{eq:dyn}) are adjusted to reasonably model a DJI (R) Mavic 3 UAV. The history is chosen to ensure obstacle avoidance, allowing the UAV to navigate within the vegetation while avoiding tree trunks.
+
+Physical experimental evaluation was performed on an initial segment of the overall trajectory, demonstrating the potential feasibility of the method using ergodic controllers. The actual path is derived from MATLAB (R). Further physical evaluation is ongoing (see Sec.~\ref{sec:conc}). Exploratory trajectories are imported into the UAV's flight controller using waypoints, managed by proprietary software; however, compatibility with other software and flight controllers is supported. Data are reported after a horizon of 5~000 time steps. The obstacles are positioned so that the UAV operates within the canopy at an altitude of 2.5 meters, excluding small bushes but including tree trunks. The UAV's velocity is set to 1.5 meters per second.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion and Future Directions}\label{sec:conc}
