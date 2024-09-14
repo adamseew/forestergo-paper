@@ -53,7 +53,7 @@
 \AddToHook{shipout/foreground}{
   \begin{tikzpicture}[remember picture,overlay]
     \node[red,rotate=45,scale=10,opacity=0.2] at (current page.center) {\small\fontfamily{phv}\selectfont%};
-%    IN~PREPARATION
+    IN~PREPARATION
 %    UNDER~REVIEW
 };   
   \end{tikzpicture}
@@ -103,6 +103,7 @@
 
 \vspace*{-.5cm}
 \begin{abstract}
+  The problem of exploring unknown and large-scale spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers often encounter limitations when applied to large-scale problems. This paper introduces a general and scaled ergodic control methodology designed to overcome these limitations. Unlike traditional ergodic controllers that rely on predefined information measures or separate obstacle avoidance, our approach dynamically generates and refines the information measure from sensory data and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including dense vegetation and agricultural settings, demonstrate the effectiveness of our scaled general ergodic control, showcasing the applicability of our methodology compared to conventional techniques typically restricted to structured or small-scale only.
 \end{abstract}
 
 
@@ -120,104 +121,111 @@
 % Deep fundamental challenges linking machine learning, optimal control, signal processing and information theory
 % Achieves manipulation tasks robustly, by not only relying on accurate sensors, but instead using a control strategy to cope with limited or inaccurate sensing information
 % Different from stochastic or patterned search! → Provides a natural way of searching
-Exploring unknown and potentially large-scale spaces with robots is a problem commonly addressed by different methodologies arising in computing and robotics. This problem is recurring in real-world use case such as monitoring, reconstruction, exploration, etc., where robots are expected to cover a given space while performing an assigned task. A key challenge to the practical applicability of these methodologies is that of leveraging resources, while, at the same time, maximizing the information gathered and optimizing the exploration accordingly~\cite{popovic2020informative,schmid2020efficient}. 
-While there are different approaches in the literature, approacheas that are informed by sensory data have emerged as of particular interest. Among these approaches, ergodic control is a significant result, as it provides a more natural way of serching through deterministic exploratory behaviours while accounting for both the motion cost and optimality~\cite{miller2016ergodic}.
+Exploring unknown and potentially large-scale spaces with robots is a problem commonly addressed by different methodologies arising in computing and robotics. This problem is recurring in real-world use cases such as monitoring, reconstruction, exploration, etc., where robots are expected to cover a given space while performing an assigned task. A key challenge to the practical applicability of these methodologies is that of leveraging resources while, at the same time, maximizing the information gathered and optimizing the exploration accordingly~\cite{popovic2020informative,schmid2020efficient}. 
+While there are different approaches in the literature, approaches that are informed by sensory data have emerged as of particular interest. Among these approaches, ergodic control is a significant result, as it provides a more natural way of searching through deterministic exploratory behaviors while accounting for both the motion cost and optimality~\cite{miller2016ergodic}.
 
-Ergodic control is a planning and controls methodology that derives robot trajecotries maximizing a given information measure, so that robots spend more time in areas with high information measure while quickly traversing areas with low information measure~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. As a consequence, it is required that the user provides an information measure a priori, or that, the information measure is derived as the robots gather more information about their sourroundings. 
-While applicable to some use cases, this is often a limitation of the existing ergodic controllers. It is indeed not always the case the information measure can be easily refined from the gathered data, or, that an a-priori information measure can be provided at all. Furthermore, it is often not-feasible to have an information measure for large-scale spaces in practice. 
-With this work we addressed this challenge. We provide a general and scaled ergodic control methodology that can be applied to a brother class of robotic use cases at large-scale. Our methodology does not require an underlying information measure but rather derives an information measure from the exploration itself, and refines such measure utilizing information about already visited areas and obstacles from sensory data. 
-Furthermore, conversely to existing ergodic control methodologies that require extenrnal obstacle avoidance techniques, e.g., control barrier functions~\cite{lerch2023safety}, optical flow~\cite{prabhakar2020ergodic}, etc., our methodology provides a tunable degree of obstacle avoidance as a ``by-product.'' 
+Ergodic control is a planning and controls methodology that derives robot trajectories maximizing a given information measure so that robots spend more time in areas with high information measure while quickly traversing areas with low information measure~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. As a consequence, it is required that the user provides an information measure a priori or that the information measure is derived as the robots gather more information about their surroundings. While applicable to some use cases, this is often a limitation of the existing ergodic controllers. It is not always the case that the information measure can be easily refined from the gathered data, or that an a priori information measure can be provided at all. Furthermore, it is also not always feasible to define an information measure for large-scale spaces in practice. With this work, we address this challenge. We provide a general and scaled ergodic control methodology that can be applied to a broader class of robotic use cases. Our methodology does not require an underlying information measure but rather, derives an information measure from the exploration itself and refines such a measure utilizing information about already visited areas and obstacles from sensory data. 
+In contrast to existing ergodic control methodologies that require external obstacle avoidance techniques, e.g., control barrier functions~\cite{lerch2023safety}, optical flow~\cite{prabhakar2020ergodic}, etc., our methodology provides additionally a tunable degree of obstacle avoidance as a ``by-product.'' 
 %
-The underlying information measure is represented utilizing a Gaussian Mixture Model (GMM), which is refined -- a process that is handled by our methodology and that does not require any user input -- from the sensory data as the robot traverses the state space. Our ergodic formulation is different from existing methods. The problem is posed so that the robot spends time in areas with low infromation measure, whereas the ``explored space'' is related to high information measure. 
-The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window. 
+The underlying information measure is represented utilizing a Gaussian Mixture Model (GMM), which is refined from the sensory data as the robot traverses the state space -- a process that is handled by our methodology and that does not require any user input. Our ergodic formulation is different from existing methods. The problem is posed so that the robot spends time in areas with low information measures, whereas the ``explored space'' is related to high information measures. The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window.
 
-Existing ergodic controllers have been studied from the point of view of time~\cite{dong2023time} and energy~\cite{seewald2024energy,naveed2024eclares} optimality and applied to a multitude of use cases. These use cases include tactile sensing~\cite{abraham2017ergodic}, active learning~\cite{abraham2021ergodic}, multi-objective optimality~\cite{ren2023pareto,srinivasan2023multi}, grasping and manipulation~\cite{shetty2022ergodic,bilaloglu2023whole} and visual rendering~\cite{low2022drozbot,prabhakar2020autonomous}. Ergodic controllers in the literature feature diverse aspects such as stochastic dynamics~\cite{torre2016ergodic,ayvali2017ergodic} and multi-agent and/or swarm control with both centralized~\cite{seewald2024energy,rao2024learning} and distributed information processing~\cite{prabhakar2020ergodic,coffin2022multi}. Although some of these use-cases involve information gathering~\cite{dressel2018optimality} and features urban environments and other potentially large-scale problems~\cite{prabhakar2020ergodic,rao2023multi}, a generic large-scale ergodic controller has not been studied yet.
-Even though recent methods have been making progress in this direction~\cite{whittemeyer2023bi,seewald2024energy,naveed2024eclares,dong2023time}, these methods do not scale efficiently due to the formulation of the underlying optimization and/or require an a-priori information measure. From an obstacle avoidance perspective, even though there are ergodic controllers that feature obstacle avoidance~\cite{lerch2023safety}, this is an external component on top of the ergodic controller that then results in a sub-ergodic solution~\cite{dong2023time}, rather then an integral component of the explorer itself.
+Existing ergodic controllers have been studied from the point of view of time~\cite{dong2023time} and energy~\cite{seewald2024energy,naveed2024eclares} optimality and applied to a multitude of use cases. These use cases include tactile sensing~\cite{abraham2017ergodic}, active learning~\cite{abraham2021ergodic}, multi-objective optimality~\cite{ren2023pareto,srinivasan2023multi}, grasping and manipulation~\cite{shetty2022ergodic,bilaloglu2023whole}, and visual rendering~\cite{low2022drozbot,prabhakar2020autonomous}. Ergodic controllers in the literature feature diverse aspects such as stochastic dynamics~\cite{torre2016ergodic,ayvali2017ergodic} and multi-agent and/or swarm control with both centralized~\cite{seewald2024energy,rao2024learning} and distributed information processing~\cite{prabhakar2020ergodic,coffin2022multi}. Although some of these use cases involve information gathering~\cite{dressel2018optimality} and feature urban environments and other potentially large-scale problems~\cite{prabhakar2020ergodic,rao2023multi}, a generic large-scale ergodic controller has not been studied yet. Even though recent methods have been making progress in this direction~\cite{whittemeyer2023bi,seewald2024energy,naveed2024eclares,dong2023time}, these methods do not scale efficiently due to the formulation of the underlying optimization and/or require an a priori information measure. From an obstacle avoidance perspective, even though there are ergodic controllers that feature obstacle avoidance~\cite{lerch2023safety}, this is an external component on top of the ergodic controller that then results in a sub-ergodic solution~\cite{dong2023time} rather than an integral component of the explorer itself.
 
-We show case our general and scaled ergodic control on a large-scale problem: the problem of exploring a simulated forest and an outdoors area that has both dense vegetation and an agricultural setting, in contrast to existing ergodic control methodologies that are demonstrated in structured environments, or generally in small-scale only. Section~\ref{sec:res} shows the performance of our methods. 
-The open-source software stack to replicate our approach is made availabel on our project repository webpage\footnote{\href{https://github.com/adamseew/scaledergo}{\tt github.com/adamseew/scaledergo}}.
+We showcase our general and scaled ergodic control on a large-scale problem: the problem of exploring a simulated forest and an outdoor area that has both dense vegetation and an agricultural setting, in contrast to existing ergodic control methodologies that are demonstrated in structured environments or generally in small-scale only. Section~\ref{sec:res} shows the performance of our methods. The open-source software stack to replicate our approach and the experimental data are made available on our project repository webpage\footnote{\href{https://github.com/adamseew/scaledergo}{\tt github.com/adamseew/scaledergo}}.
 
-The remainder of this paper is then structured as follows. Sec.~\ref{sec:pb} provides the details of the underlying principles and the problem addressed. Sec.~\ref{sec:meth} is split into two sub-sections, one provides an overview of ergodic control whereas the other one details our methodology. Sec.~\ref{sec:conc} provides conclusins and draws future perspectives.
+The remainder of this paper is structured as follows. Sec.~\ref{sec:pb} provides the details of the underlying principles and the problem addressed. Sec.~\ref{sec:meth} is split into two sub-sections: one provides an overview of ergodic control, whereas the other details our methodology. Sec.~\ref{sec:conc} provides conclusions and draws future perspectives.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Formulation}\label{sec:pb}
 %\IEEEpubidadjcol
 \noindent
-This work addresses the problem of exploring a bounded and potentially large-scale space, whereby large-scale we indicate spaces of orders of dozens or even hundred of meters in both x- and y-axis. For practical reasons, we bound the exploration space, i.e., the space to be explored, to one hectare, and we condsider the exploration in two-dimensions. The formulation is such, however, that the state space might be potentially unbounded, and not limited to two dimensions~\cite{dong2023time}.
+This work addresses the problem of exploring a bounded and potentially large-scale space, where ``large-scale'' refers to spaces on the order of dozens or even hundreds of meters in both the x- and y-axes. For practical reasons, we restrict the exploration space to one hectare and consider exploration in two dimensions. However, the formulation is such that the state space could potentially be unbounded and not limited to two dimensions~\cite{dong2023time}.
 
-Let us thus consider such bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in the space except for a finite number of obstacles represented by $\mathcal{O}\subset\mathcal{Q}$.  
-In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas (i.e., with low information density) while avoiding the obstacles, i.e., $\mathcal{Q}\cap\mathcal{O}$, as opposed to other works on ergodic control in the literature where the exploration happens in areas of high information density instead~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}.
+Let us consider a bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in this space except for a finite number of obstacles~represented by $\mathcal{O}\subset\mathcal{Q}$. In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas (i.e., with low information density) while avoiding the obstacles, i.e., $\mathcal{Q}\,\,\cap\,\,\mathcal{O}$, as opposed to other literature on ergodic control in the literature where exploration happens in areas of high information density instead~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}.
+
 \begin{defn}[Ergodicity]
-  Given the bounded state space $\mathcal{Q}$, a trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} w.r.t. a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
+  Given the bounded state space $\mathcal{Q}$, a trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} with respect to a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
   \begin{equation}
     \lim_{t\rightarrow\infty}{\int_{\mathcal{Q}}\phi(\mathbf{x})\Omega(\mathbf{x})\,d\mathbf{x}=\frac{1}{t}\int_{\mathcal{T}}{{\Omega\big(\overline{\mathbf{x}}(t)\big)}}\,dt},
   \end{equation}
-  where $\overline{\,\cdot\,}$ is a map that maps the state space to the exploration spaces, and $\Omega$ are all the Lebesgue function as defined in, e.g.,~\cite{mathew2011metrics}.
+  where $\overline{\,\cdot\,}$ is a map that maps the state space to the exploration spaces, and $\Omega$ are all the Lebesgue functions as defined in, e.g.,~\cite{mathew2011metrics}.
 \end{defn}
 
-The spatial distribution $\phi$ is built utilizing a Gaussian Mixture Model (GMM). 
+The spatial distribution $\phi$ is constructed using a Gaussian Mixture Model (GMM). 
 \begin{defn}[Moving GMM]\label{def:movement}
-  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in a GMM, whose initial probability is equally distributed. A \textit{moving GMM} is
-  \begin{equation}
+  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in a GMM, with an initial probability equally distributed. A \textit{moving GMM} is \begin{equation}
     \phi(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x}):=\sum_{i=1}^n{\alpha_i\,\mathcal{N}_i(\mathbf{x}\,|\,\mu_i,\Sigma_i)},
   \end{equation}
-  where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the the covariance matrix and $\mu_i\in\mathcal{Q}$ the center of a Gaussian $\mathcal{N}_i$. The GMM has further variable centers $\boldsymbol{\mu}\in\mathcal{Q}^n$ and variable mixing coefficients $\boldsymbol{\alpha}\in\mathbb{R}_{>0}^n$.
-  
-  Bold letters indicate vector, i.e., $\mathbf{x}\in\mathcal{Q}$ is the state space vector whereas $\boldsymbol{\alpha}$, $\boldsymbol{\mu}$ are the vectors compromising ideal GMM's probability and position components respectively (see Sec.v~\ref{sec:meth}).
-   
+  where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the covariance matrix and $\mu_i\in\mathcal{Q}$ denotes the center of a Gaussian $\mathcal{N}_i$. The GMM also has variable centers $\boldsymbol{\mu}\in\mathcal{Q}^n$ and variable mixing coefficients $\boldsymbol{\alpha}\in\mathbb{R}_{>0}^n$.
 \end{defn}
+
+The notation $\mathbb{S}_{>0}$ denotes a strictly positive set $\mathbb{S}$. Bold letters indicate vectors, i.e., $\mathbf{x}\in\mathcal{Q}$ is the state space vector, whereas $\boldsymbol{\alpha}$, $\boldsymbol{\mu}$  are the vectors comprising the ideal GMM's mixing coefficients and position components respectively (see Sec.~\ref{sec:meth}).
 
 An ergodic metric is then defined as a value that quantifies the ergodicity.
 \begin{defn}[Ergodic metric]\label{def:ergomet}
-  Consider a time average distribution of the trajecotry over a limited time window $t$, e.g.,
+  Consider a time average distribution of the trajectory over a limited time window $t$, e.g.,
   \begin{equation}
-    h\big(\mathbf{x}(t)\big):=\frac{1}{t}\int_\mathcal{T}\Delta\big((\mathbf{x})(t)\big)\,dt.
+    h\big(\mathbf{x}(t)\big):=\frac{1}{t}\int_\mathcal{T}\Delta\big((\mathbf{x})(t)\big)\,dt,
   \end{equation}
-  $\Delta$ is defined as a Dirac delta function. An \textit{ergodic metric} is an $L^2$-inner product in between the average of the spatial and time distributions.
+  where $\Delta$ is defined as a Dirac delta function. An \textit{ergodic metric} is an $L^2$-inner product in between the average of the spatial and time distributions.
 \end{defn}
 
 \begin{pb}[Scaled ergodic control]\label{pb}
-  Given the state space and the obstacles space $\mathcal{Q}$ and $\mathcal{O}$ respectively, assume the number of Gaussian components $n$ of a GMM is given. The \textit{scaled ergodic control} problem is the problem of finding the evolution of the Gaussian components of the moving GMM, i.e., $\boldsymbol{\alpha}(t)$ and $\boldsymbol{\mu}(t)$ and of the control $\mathbf{u}(t)\in\mathcal{U}$ so that $\mathbf{x}(t)$ explores $\mathcal{Q}$ while avoiding $\mathcal{O}$ \textit{and}, the ergodic metric is minimized.
+  Given the state space and the obstacles space $\mathcal{Q}$ and $\mathcal{O}$ respectively, assume the number of Gaussian components $n$ is given. The \textit{scaled ergodic control} problem is the problem of finding the evolution of the Gaussian components of a moving GMM, i.e., $\boldsymbol{\alpha}(t)$ and $\boldsymbol{\mu}(t)$ and of the control $\mathbf{u}(t)\in\mathcal{U}$ so that $\mathbf{x}(t)$ explores $\mathcal{Q}$ while avoiding $\mathcal{O}$ \textit{and} the ergodic metric is minimized.
 \end{pb}
 
-We propose a solution to Problem~\ref{pb} and demostrate both experimentally the feasibility of the solution, underlying the existence of trade-offs in between the accuracy (i.e., coverage) and the exploration soundness (i.e., obstacle avoidance capabilities) in Sec.~\ref{sec:res1} and~\ref{sec:res2} respectively.
+We note that it is not a requirement that the obstacle space $\mathcal{O}$ is known at the beginning of the exploration.
+
+We propose a solution to Problem~\ref{pb} and demonstrate experimentally the feasibility of the solution, highlighting the trade-offs between accuracy (i.e., coverage) and exploration soundness (i.e., obstacle avoidance capabilities) in Sec.~\ref{sec:res1} and~\ref{sec:res2} respectively.
+
 
 %%%%%%%%%%%%%%%%%%
 \section{Methods}\label{sec:meth}
 \noindent
-This section details our methods. Sec.~\ref{sec:canon} introduces the concept of canonical ergodic control for exploration in bounded areas with an information density distribution. Sec.~\ref{sec:sol} describes our methodology of scaled ergodic control, i.e., ergodic control with a moving information density as a function of explored against unexplored space.
+This section details our methods. Sec.~\ref{sec:canon} introduces the concept of canonical ergodic control for exploration in bounded areas with an information density distribution. Sec.~\ref{sec:sol} describes our methodology of scaled ergodic control, i.e., ergodic control with a moving information density as a function of explored versus unexplored space.
 
 \subsection{Canonical ergodic control}
 \label{sec:canon}
 \noindent
-To quantify the time average and the average of the spatial distributions $h$ and $\phi$ respectively, let us consider Fourier series basis functions, as common way to consider the distributions in the spectral domain~\cite{mathew2011metrics}. For the time average distribtuion, the coefficients of an equivalent basis function can be expressed
+To quantify the time average and the average of the spatial distributions $h$ and $\phi$ respectively, we use Fourier series basis functions, a common method for evaluating distributions in the spectral domain~\cite{mathew2011metrics}. For the time average distribution, the coefficients of an equivalent basis function can be expressed as
 \begin{equation}\label{eq:ck}
   c_k\big(\mathbf{x}(t)\big):=\int_{\mathcal{T}}{\prod_{d\in\{1,2\}}}{\cos{\big(2\pi k_d\mathbf{x}_d(\tau)/T\big)}/T^2}\,d\tau/t,
 \end{equation}
-where $T\in\mathbb{R}_{>0}$ is a given period. $\,\cdot\,_d$ indicates the $d$th item of a vector. %, so that $d$ iterates all the dimensions.
+where $T\in\mathbb{R}_{>0}$ is a given period and $\,\cdot\,_d$ denotes the $d$th item of a vector.
 
-Equation~(\ref{eq:ck}) expresses the cosine basis function for a coefficient $k$, i.e., we consider only the positive slice of the spectral domain and thus ignore the function's imaginary component. The coefficients $k\in\mathcal{K}$ depend on a given number of frequencies $\kappa\in\mathbb{N}_{>0}$, including the base frequency, and are built so that $\mathcal{K}\in\mathbb{N}^2$ is a set of index vectors that cover the set $\kappa\times\cdots\times\kappa\in\mathbb{N}^{\kappa^2}$, i.e., the coefficients are evaluated on the entire domain~\cite{calinon2020mixture}.
+Equation~(\ref{eq:ck}) expresses the cosine basis function for a coefficient $k$, considering only the positive slice of the spectral domain and thus ignoring the function's imaginary component. The coefficients $k\in\mathcal{K}$ depend on a given number of frequencies $\kappa\in\mathbb{N}_{>0}$, including the base frequency, and are constructed so that $\mathcal{K}\in\mathbb{N}^2$ is a set of index vectors covering the set $\kappa\times\cdots\times\kappa\in\mathbb{N}^{\kappa^2}$, i.e., they are built so that the coefficients are evaluated over the entire domain~\cite{calinon2020mixture}.
 
-For the average of the spatial distribution, the coefficients of an equivalent basis function can be expressed similarly
+For the average of the spatial distribution, the coefficients of an equivalent basis function can be expressed similarly as 
 \begin{equation}\label{eq:phik}
   \phi_k(\mathbf{x}):=\int_{\mathcal{Q}}{\sum_{d\in\{1,2\}}}{\phi(\mathbf{x})c(\mathbf{x})\,d\mathbf{x}},
 \end{equation}
-where $c$ is the integrand in Eq.~(\ref{eq:ck}) in the given point $\mathbf{x}$, which is evaluated against the current time step.
+where $c$ is the integrand in Eq.~(\ref{eq:ck}) at the given point $\mathbf{x}$, evaluated at the current time step.
 
-The aim of an ergodic controller is to minimize an ergodic metric, i.e., the $L^2$-inner product of the distributions $h$ and $\phi$ (see Definition~\ref{def:ergomet}). A consolidated metric~\cite{abraham2017ergodic,abraham2021ergodic,seewald2024energy,lerch2023safety,abraham2018decentralized,dong2023time} for this purpose is, for instance,
-\begin{equation}
+The aim of an ergodic controller is to minimize an ergodic metric, i.e., the $L^2$-inner product of the distributions $h$ and $\phi$ (see Definition~\ref{def:ergomet}). A consolidated metric~\cite{abraham2017ergodic,abraham2021ergodic,seewald2024energy,lerch2023safety,abraham2018decentralized,dong2023time} for this purpose is, for instance, \begin{equation}
   \mathcal{E}(\mathbf{x}):=\sum_{k\in\mathcal{K}}{\Lambda_k(c_k-\phi_k)^2/2},
 \end{equation}
-where the coefficients of the time average and the average spatial distributions are expressed in Eq.~(\ref{eq:ck}--\ref{eq:phik}). 
+where the coefficients of the time average and the average spatial distributions are expressed in Eq.~(\ref{eq:ck}--\ref{eq:phik}).
 
-$\Lambda_k$ is a weight factor that expresses which frequency has more weight, e.g., with %the factor
+$\Lambda_k$ is a weight factor that determines the importance of different frequencies, e.g., with
 \begin{equation}
   \Lambda_k:=\frac{1}{\sqrt{\big(1+\lVert{k}\rVert^2\big)^3}},
 \end{equation}
-lower frequencies are to be preferred.
+lower frequencies are preferred.
 
-Note that in Eq.~(\ref{eq:phik}) we have utilized the expression for a standard GMM. % instead of a moving GMM in Definition~\ref{def:movement}. 
-We utilize the expression of the moving GMM that we have defined in Definition~\ref{def:movement} (i.e., GMM with variables centers and mixing coefficients) in the next section.
+Note that in Eq.~(\ref{eq:phik}) we have utilized the expression for a standard GMM. 
+We use the expression for the moving GMM defined in Definition~\ref{def:movement} (i.e., GMM with variable centers and mixing coefficients) in the next section.
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Scaled ergodic control}
 \label{sec:sol}
@@ -243,6 +251,19 @@ The scaled ergodic control problem can then be expressed as the problem of findi
 
 Let us thus consider a modified expression for the center of the gaussian $\mu_i:=E\big(\mathbf{x}(t)\big)-e_i$ where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ is a displacement that allow to ``move'' the Gaussian components in the moving GMM. 
 
+\begin{figure}[t!]
+  \begin{minipage}[t!]{.25\columnwidth}
+    \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . }
+    \label{fig:0}
+  \end{minipage}\hspace*{.3cm}
+  \begin{minipage}[t!]{.7\columnwidth}
+    \vspace*{-.3cm}
+    \input{figures/compare.pdf_tex}
+  \end{minipage}
+  \vspace*{-.4cm}
+  \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+\end{figure}
+
 Our methodology is such that the scaled ergodic controller finds the minimum displacement of the Gaussians so that the the space to be visited is delimited by $\mathcal{Q}\cap\mathcal{O}$. Such controller can be expressed with the optimal control problem (OCP)
 \begin{subequations}\label{eq:ocp}\begin{align}
   \min_{\Theta}%\int_{\mathcal{T}}\mathbf{u}(\tau)^TR\mathbf{u}(\tau)\,d\tau+
@@ -260,20 +281,6 @@ The problem is formulated so that it finds displacement, and probability for eac
 The large-scale exploration is considered concluded when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to set up the problem so that the exploration does not terminate or lasts for long-term, such as in~\cite{seewald2022energy}.
 
 Other practical considerations, such as the choice of the history and the size of the moving GMM, are detailed in the next section.
-
-
-\begin{figure}[t!]
-  \begin{minipage}[t!]{.25\columnwidth}
-    \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . }
-    \label{fig:0}
-  \end{minipage}\hspace*{.3cm}
-  \begin{minipage}[t!]{.7\columnwidth}
-    \vspace*{-.3cm}
-    \input{figures/compare.pdf_tex}
-  \end{minipage}
-  \vspace*{-.4cm}
-  \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results}\label{sec:res}
@@ -318,16 +325,6 @@ Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV
 
 Fig.~\ref{fig:1-3} shows the trajecotry at time instant 10~000. Similarly to the previous figures, the moving GMM model and the coverage are illustrated at the top-left and bottom-left respectively. One can notice that while the obstacles are overally avoided, the simulated UAV come close or even passes through the obstacles at times. We report a relation in between the degree of obstacle avoidance capabilities and the coverage, as discussed in the next section.
 
-\subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
-\noindent
-The OCP posed as Eq.~(\ref{eq:ocp}) have no optimal solution. In this scenario, our algorithm is such that a sub-optimal solution is returned, where the constraint expressed in Eq.~(\ref{eq:const}) is not respected, e.g., the simulated trees in Sec.~\ref{sec:res1} are not avoided with the desired treshold. 
-While we found this behavior happening in an initial iteration of our scaled ergodic methodology, we have noticed that we can tune have well we can avoid the obstacles as a by-product of our approach utilizing the concept of history $h$. 
-
-Fig.~\ref{fig:0} resports our experimental results in terms of built-in obstacle avoidance capabilities against coverage and a collision metric, underlying the trade-offs in between these metrics. The collision metric $e_c$ is built so that every occurence of a point that invalidates the constraint in Equation~(\ref{eq:const}) within a given treshold is counted. The actual count of occurences is then reported on the left y-axis of the figure, with the horizon being set to 50~000, i.e., the actual invalidation ratio for a history window set to zero is solely 0.044 \%, whereas is up an order of magnitude higher for a history window set to 1~000 (0.46 \%). In all the experiments, the treshold is set to 60 centimeters.
-The coverage is calculated in the same way as reported in Sec.~\ref{sec:res1}. It is to be noted that full coverage is not achieved, as obstcles are also counted in the overall coverage metric.
-
-The top of the figure reports the three metrics on a logarithmic scale. Here we have noticed that a history window set to 100 provides the best trade-off in terms of obstacle avoidance (i.e., 0.14 \%) and coverage metrics. The bottom of the figure the shows a detail of the history window around~100, +/-25.
-
 \begin{figure}[t!]
   \begin{minipage}[t!]{.67\columnwidth}
     \hspace*{.1cm}\input{figures/phys.pdf_tex}
@@ -340,6 +337,16 @@ The top of the figure reports the three metrics on a logarithmic scale. Here we 
   \vspace*{-.2cm}
   \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
 \end{figure}
+
+\subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
+\noindent
+The OCP posed as Eq.~(\ref{eq:ocp}) have no optimal solution. In this scenario, our algorithm is such that a sub-optimal solution is returned, where the constraint expressed in Eq.~(\ref{eq:const}) is not respected, e.g., the simulated trees in Sec.~\ref{sec:res1} are not avoided with the desired treshold. 
+While we found this behavior happening in an initial iteration of our scaled ergodic methodology, we have noticed that we can tune have well we can avoid the obstacles as a by-product of our approach utilizing the concept of history $h$. 
+
+Fig.~\ref{fig:0} resports our experimental results in terms of built-in obstacle avoidance capabilities against coverage and a collision metric, underlying the trade-offs in between these metrics. The collision metric $e_c$ is built so that every occurence of a point that invalidates the constraint in Equation~(\ref{eq:const}) within a given treshold is counted. The actual count of occurences is then reported on the left y-axis of the figure, with the horizon being set to 50~000, i.e., the actual invalidation ratio for a history window set to zero is solely 0.044 \%, whereas is up an order of magnitude higher for a history window set to 1~000 (0.46 \%). In all the experiments, the treshold is set to 60 centimeters.
+The coverage is calculated in the same way as reported in Sec.~\ref{sec:res1}. It is to be noted that full coverage is not achieved, as obstcles are also counted in the overall coverage metric.
+
+The top of the figure reports the three metrics on a logarithmic scale. Here we have noticed that a history window set to 100 provides the best trade-off in terms of obstacle avoidance (i.e., 0.14 \%) and coverage metrics. The bottom of the figure the shows a detail of the history window around~100, +/-25.
 
 \subsection{Outdoors model}\label{sec:res3}
 \noindent
