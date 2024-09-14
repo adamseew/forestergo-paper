@@ -244,7 +244,7 @@ Our methodology is such that the scaled ergodic controller finds the minimum dis
   \min_{\Theta}%\int_{\mathcal{T}}\mathbf{u}(\tau)^TR\mathbf{u}(\tau)\,d\tau+
   \mathcal{E}&(\mathbf{x})+\Psi(\mathbf{e}),\label{eq:cost}\\
   \text{s.t. }\dot{\mathbf{x}}&=f(\mathbf{x}(t),\mathbf{u}(t)),\label{eq:dyn}\\
-  \mathbf{x}&(t)\in\mathcal{Q}\cap\mathcal{O},\,\mathbf{u}(t)\in\mathcal{U},\\
+  \mathbf{x}&(t)\in\mathcal{Q}\cap\mathcal{O},\,\mathbf{u}(t)\in\mathcal{U},\label{eq:const}\\
   \mathbf{x}&(t_0),n,\kappa,l,h,\text{ are given},\label{eq:ocpconsttotf}
 \end{align}\end{subequations}
 where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the moving GMM along the control and the state. The function $\Psi$ maps the displacement to a cost value, e.g., $\Sigma_{e_i\in\mathbf{e}}|e_i|$, where $|\hspace{.2ex}\cdot\hspace{.2ex}|$ is the defined as an $L^2$-norm.
@@ -261,7 +261,7 @@ Other practical considerations, such as the choice of the history and the size o
 \begin{figure}[t!]
   \begin{minipage}[t!]{.25\columnwidth}
     \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . }
-      %
+    \label{fig:0}
   \end{minipage}\hspace*{.3cm}
   \begin{minipage}[t!]{.7\columnwidth}
     \vspace*{-.3cm}
@@ -269,13 +269,7 @@ Other practical considerations, such as the choice of the history and the size o
   \end{minipage}
   \vspace*{-.4cm}
   \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
-  \label{fig:0}
 \end{figure}
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Results}\label{sec:res}
@@ -285,29 +279,8 @@ The MPC optimization stack, i.e., the solver that solves the OCP in Eq.~(\ref{eq
 
 In the following, Sec.~\ref{sec:res1} describes simulated experiemtnal results, a forest with an area of 3~600 squared meteres. Sec.~\ref{sec:res2} details our finding in terms of built-in obstacle avoidance capabilities against coverage of our general scaled ergodic controller. Sec.~\ref{sec:res3} describes our real-world experimental results, a vegetated area with multiple obstacles with a total area of 10~000 squared meters.
 
-\subsection{Simulated forest}\label{sec:res1}
-\noindent
-Simulated results are condacted in a forest with 45 trees spread randomly in area of 3~600 squared meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 10~000 time step, when a desired coverage treshold is achieved within a certain approximation (i.e., 60\%~+/-5\%). The number of Gaussians $n$ is set to five, whereas the initial poition is set to the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, which in line with other ergodic controllers in the literature~\cite{seewald2022energy}. 
-
-Fig.~\ref{fig:1} shows the results for the simulated forest at tree distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (right of the figure) after 1~000 time steps. The history is illustrated with the dark-red line and the current point with the dark-red dot. The top-left of the figure shows the underlying information density distribution (i.e., the moving GMM in Definition~\ref{def:movement}) with a detail of the five Gaussian components in the area that represents the current history interval. The optimal value of the Gaussians centers $\boldsymbol{\mu}$ and of the mixing coefficients $\boldsymbol{\alpha}$ are such that the moving GMM represents the hisotory (i.e., the expected value and the covariance of the trajectory on the current history window) and that the Gaussians are deviated as little as possible to avoid the obstacles.
-The bottom-left of the figure shows the coverage map, where each square counts the number of points in within the square in a given time.
-
-Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV keeps flying through the obstacles, exploring further the state space. The moving GMM is then shown on the top-right, whereas the coverage map is shown at the bottom-right.
-
-Fig.~\ref{fig:1-3} shows the trajecotry at time instant 10~000. Similarly to the previous figures, the moving GMM model and the coverage are illustrated at the top-left and bottom-left respectively. One can notice that while the obstacles are overally avoided, the simulated UAV come close or even passes through the obstacles at times. We report a relation in between the degree of obstacle avoidance capabilities and the coverage, as discussed in the next section.
-
-\subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
-\noindent
-The OCP posed as Eq.~(\ref{eq:ocp}) might, at times, find no optimal solutions. In this scenario, our algorithm is such that a sub-optimal solution is returned, where the constraint expressed in Eq.~(\ref{}) is not respected, e.g., the simulated trees in Sec.~\ref{sec:res1} are not avoided with the desired treshold.
-
-\subsection{Real-world experiments}\label{sec:res3}
-\noindent
-.
 
 
-
-~
-\newpage
 
 \begin{figure}[t!]
   \centering
@@ -330,6 +303,52 @@ The OCP posed as Eq.~(\ref{eq:ocp}) might, at times, find no optimal solutions. 
   \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
   \label{fig:1}
 \end{figure}
+
+
+\subsection{Simulated forest}\label{sec:res1}
+\noindent
+Simulated results are condacted in a forest with 45 trees spread randomly in area of 3~600 squared meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time step, when a desired coverage treshold is achieved within a certain approximation (i.e., 60\%~+/-5\%). The number of Gaussians $n$ is set to five, whereas the initial poition is set to the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, which in line with other ergodic controllers in the literature~\cite{seewald2022energy}. 
+
+Fig.~\ref{fig:1} shows the results for the simulated forest at tree distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (right of the figure) after 1~000 time steps. The history is illustrated with the dark-red line and the current point with the dark-red dot. The top-left of the figure shows the underlying information density distribution (i.e., the moving GMM in Definition~\ref{def:movement}) with a detail of the five Gaussian components in the area that represents the current history interval. The optimal value of the Gaussians centers $\boldsymbol{\mu}$ and of the mixing coefficients $\boldsymbol{\alpha}$ are such that the moving GMM represents the hisotory (i.e., the expected value and the covariance of the trajectory on the current history window) and that the Gaussians are deviated as little as possible to avoid the obstacles.
+The bottom-left of the figure shows the coverage map, where each square counts the number of points in within the square in a given time.
+
+Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV keeps flying through the obstacles, exploring further the state space. The moving GMM is then shown on the top-right, whereas the coverage map is shown at the bottom-right.
+
+Fig.~\ref{fig:1-3} shows the trajecotry at time instant 10~000. Similarly to the previous figures, the moving GMM model and the coverage are illustrated at the top-left and bottom-left respectively. One can notice that while the obstacles are overally avoided, the simulated UAV come close or even passes through the obstacles at times. We report a relation in between the degree of obstacle avoidance capabilities and the coverage, as discussed in the next section.
+
+\subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
+\noindent
+The OCP posed as Eq.~(\ref{eq:ocp}) have no optimal solution. In this scenario, our algorithm is such that a sub-optimal solution is returned, where the constraint expressed in Eq.~(\ref{eq:const}) is not respected, e.g., the simulated trees in Sec.~\ref{sec:res1} are not avoided with the desired treshold. 
+While we found this behavior happening in an initial iteration of our scaled ergodic methodology, we have noticed that we can tune have well we can avoid the obstacles as a by-product of our approach utilizing the concept of history $h$. 
+
+Fig.~\ref{fig:0} resports our experimental results in terms of built-in obstacle avoidance capabilities against coverage and a collision metric, underlying the trade-offs in between these metrics. The collision metric $e_c$ is built so that every occurence of a point that invalidates the constraint in Equation~(\ref{eq:const}) within a given treshold is counted. The actual count of occurences is then reported on the left y-axis of the figure, with the horizon being set to 50~000, i.e., the actual invalidation ratio for a history window set to zero is solely 0.044 \%, whereas is up an order of magnitude higher for a history window set to 1~000 (0.46 \%). In all the experiments, the treshold is set to 60 centimeters.
+The coverage is calculated in the same way as reported in Sec.~\ref{sec:res1}. It is to be noted that full coverage is not achieved, as obstcles are also counted in the overall coverage metric.
+
+The top of the figure reports the three metrics on a logarithmic scale. Here we have noticed that a history window set to 100 provides the best trade-off in terms of obstacle avoidance (i.e., 0.14 \%) and coverage metrics. The bottom of the figure the shows a detail of the history window around~100, +/-25.
+
+
+
+\begin{figure}[t!]
+  \begin{minipage}[t!]{.67\columnwidth}
+    \input{figures/phys.pdf_tex}
+  \end{minipage}\hspace*{.6cm}
+  \begin{minipage}[t!]{.25\columnwidth}
+    \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+    \vspace*{-.2cm}
+    \label{fig:0}
+  \end{minipage}
+  \vspace*{-.2cm}
+  \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+\end{figure}
+
+\subsection{Real-world experiments}\label{sec:res3}
+\noindent
+.
+
+
+
+~
+\newpage
 
 
 
