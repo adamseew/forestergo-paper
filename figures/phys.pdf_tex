@@ -54,14 +54,14 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \scriptsize
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/_phys.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/_phys_compressed.pdf}}%
     \put(0.0596648,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
     \put(0.2280382,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20\end{tabular}}}}%
     \put(0.40703452,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40\end{tabular}}}}%
     \put(0.58603085,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}60\end{tabular}}}}%
     \put(0.76502718,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}80\end{tabular}}}}%
     \put(0.92277765,0.06911429){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/_phys.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/_phys_compressed.pdf}}%
     \put(0.03355019,0.10585182){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
     \put(0.01230433,0.28484815){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}20\end{tabular}}}}%
     \put(0.01230433,0.46384448){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}40\end{tabular}}}}%
@@ -69,7 +69,7 @@
     \put(0.01230433,0.82183713){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}80\end{tabular}}}}%
     \put(-0.00363006,1.00083346){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}100\end{tabular}}}}%
     \put(0.14552814,0.92379477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize 10 meters\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/_phys.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/_phys_compressed.pdf}}%
     \put(0.4740953,0.02780806){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x (m)\end{tabular}}}}%
     \put(-0.02703214,0.52545463){\color[rgb]{0.14901961,0.14901961,0.14901961}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{red} y (m)\end{tabular}}}}}%
   \end{picture}%
