@@ -52,7 +52,7 @@
   \makeatother%
   \begin{picture}(1,0.65673458)%
     \lineheight{1}%
-    \footnotesize
+    \small
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/____ilabs.svg.2024_09_15_22_09_28.0_compressed.pdf}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/____ilabs.svg.2024_09_15_22_09_28.0_compressed.pdf}}%

@@ -104,7 +104,7 @@
 
 %\vspace*{.5cm}
 \begin{abstract}
-  The problem of exploring unknown and large-scale spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers often encounter limitations when applied to large-scale problems. This paper introduces a general and scaled ergodic control methodology designed to overcome these limitations. Unlike traditional ergodic controllers that rely on predefined information measures or separate obstacle avoidance, our approach dynamically generates and refines the information measure from sensory data and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including dense vegetation and an agricultural field, demonstrate the effectiveness of our scaled general ergodic control, showcasing the applicability of our methodology compared to conventional techniques typically restricted to structured or small-scale only.
+  The problem of exploring unknown and large-scale spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data, e.g., vision, positioning, etc., have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers often encounter limitations when applied to large-scale problems. This paper introduces a general and scaled ergodic control methodology designed to overcome these limitations. Unlike traditional ergodic controllers that rely on predefined information measures, our approach dynamically generates and refines the information measure from sensory data. and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including dense vegetation and an agricultural field, demonstrate the effectiveness of our scaled general ergodic control, showcasing the applicability of our methodology compared to conventional techniques typically restricted to structured or small-scale only.
 \end{abstract}
 
 
@@ -140,7 +140,7 @@ Existing ergodic controllers have been studied from the point of view of time~\c
 Ergodic control is a planning and controls methodology that derives robot trajectories maximizing a given information measure so that robots spend more time in areas with high information measure while quickly traversing areas with low information measure~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. As a consequence, it is required that the user provides an information measure a priori or that the information measure is derived as the robots gather more information about their surroundings. While applicable to some use cases, this is often a limitation of the existing ergodic controllers. It is not always the case that the information measure can be easily refined from the gathered data, or that an a priori information measure can be provided at all. Furthermore, it is also not always feasible to define an information measure for large-scale spaces, % in practice. 
 where with ``large-scale'' we refer to spaces on the order of dozens or even hundreds of meters. 
 
-With this work, we address this challenge. We provide a general and scaled ergodic control methodology that can be applied to a broader class of robotic use cases. Our methodology does not require an underlying information measure but rather, derives an information measure from the exploration itself and refines such a measure utilizing information about already visited areas and obstacles. %from sensory data. 
+With this work, we address this challenge, with a general and scaled ergodic control methodology that can be applied to a broader class of robotic use cases. Our methodology does not require an underlying information measure but rather, derives an information measure from the exploration itself and refines such a measure utilizing information about already visited areas and obstacles. %from sensory data. 
 In contrast to existing ergodic control methodologies that require external obstacle avoidance techniques, e.g., control barrier functions~\cite{lerch2023safety}, optical flow~\cite{prabhakar2020ergodic}, etc., our methodology provides additionally a tunable degree of obstacle avoidance as a ``by-product,'' reducing the reliance on external obstacle avoidance techniques.  
 %
 The underlying information measure is represented utilizing a Gaussian Mixture Model (GMM), which is refined from the sensory data as the robot traverses the state space -- a process that is handled by our methodology and that does not require any user input. Our ergodic formulation is different from existing methods. The problem is posed so that the robot spends time in areas with low information measures, whereas the ``explored space'' is related to high information measures. The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window.
@@ -303,12 +303,12 @@ Additional practical considerations, such as the choice of history and the size 
   \vspace*{-.3cm}
   \begin{subfigure}[t]{\linewidth}
   \hspace*{-.15cm}\input{figures/__steps_1.pdf_tex}
-  \caption{The trajectory, the underlying information measure, and the coverage reported after 1~000 time steps.}
+  \caption{The trajectory, the underlying information measure, and the coverage reported after 1000 time steps.}
   \label{fig:1-1}
   \end{subfigure}
   \begin{subfigure}[t]{\linewidth}
   \hspace*{-.15cm}\input{figures/_steps_2.pdf_tex}
-  \caption{After 2~500 time steps.}
+  \caption{After 2500 time steps.}
   \label{fig:1-2}
   \end{subfigure}
   \begin{subfigure}[t]{\linewidth}
@@ -328,7 +328,6 @@ This section provides an overview of our experimental setup and showcases the re
 Experiments are conducted using \textsc{Matlab}~(R), while interfaces for physical experimental evaluation are supported by a routine implemented in Python. The MPC optimization stack, which solves the OCP in Eq.~(\ref{eq:ocp}), relies on two external open-source components: the non-linear programming solver IPOPT~\cite{wachter2006implementation} and the algorithmic differentiation library CasADi~\cite{andersson2012casadi}.
 
 In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest with an area of 3600~square~meters. Sec.~\ref{sec:res2} details our findings regarding the built-in obstacle avoidance capabilities of our general scaled ergodic controller compared to its coverage performance. Sec.~\ref{sec:res3} describes the outdoor modeled results, featuring an area with both dense vegetation and an agricultural field, including multiple obstacles and a total area of 10~000 square meters.
-
 
 \begin{figure}[t!]
   \begin{minipage}[t!]{.67\columnwidth}
@@ -372,8 +371,7 @@ Additional experimental evaluation is conducted using a model of an outdoor vege
 
 Fig.~\ref{fig:2} illustrates the path taken, with the history represented by the dark-red line and the current point marked by the dark red dot. The history is set to 150 time steps, and the dynamics in Eq.~(\ref{eq:dyn}) are adjusted to reasonably model a DJI (R) Mavic 3 UAV. The history is chosen to ensure obstacle avoidance, allowing the UAV to navigate within the vegetation while avoiding tree trunks.
 
-Physical experimental evaluation was performed on an initial segment of the overall trajectory to assess the future applicability of the method to real-world use cases. However, the actual path is derived from \textsc{Matlab} (R). Further physical evaluation is ongoing (see Sec.~\ref{sec
-}). Exploratory trajectories are imported into the UAV's flight controller using waypoints managed by proprietary software; compatibility with other software and flight controllers is also supported. Data are reported after a horizon of 5000 time steps. The obstacles are positioned so that the UAV operates within the canopy at an altitude of 2.5 meters, excluding small bushes but including tree trunks. The UAV's velocity is set to 1.5 meters per second.
+Physical experimental evaluation was performed on an initial segment of the overall trajectory to assess the future applicability of the method to real-world use cases. However, the actual path is derived from \textsc{Matlab} (R). Further physical evaluation is ongoing (see Sec.~\ref{sec:conc}). Exploratory trajectories are imported into the UAV's flight controller using waypoints managed by proprietary software; compatibility with other software and flight controllers is also supported. Data are reported after a horizon of 5000 time steps. The obstacles are positioned so that the UAV operates within the canopy at an altitude of 2.5 meters, excluding small bushes but including tree trunks. The UAV's velocity is set to 1.5 meters per second.
 
 
 
