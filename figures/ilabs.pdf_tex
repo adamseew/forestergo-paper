@@ -56,7 +56,7 @@
     \setlength\tabcolsep{0pt}%
 
 
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/_ilabs_compressed.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/__ilabs.pdf}}%
     \put(0.36650428,0.38829829){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mathbf{x}(t-h)$\end{tabular}}}}%
     \put(0.36450428,0.39029829){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mathbf{x}(t-h)$\end{tabular}}}}%
 
@@ -76,7 +76,7 @@
     \put(0.84972419,0.24271723){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} $\mu_2$\end{tabular}}}}%
     \put(0.84772419,0.24471723){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_2$\end{tabular}}}}%
 
-    \put(0.27539428,0.05492729){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\color{white}\mathcal{O}$\end{tabular}}}}%
+    %\put(0.27539428,0.05492729){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\color{white}\mathcal{O}$\end{tabular}}}}%
     \put(0.27339428,0.05692729){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mathcal{O}$\end{tabular}}}}%
 
     \put(0.51159111,0.11143919){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mu_5$\end{tabular}}}}%
