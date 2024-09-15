@@ -107,6 +107,8 @@
 \end{abstract}
 
 
+% TODOs remove todo, check for citations, write conclusions, illustrative abstract, internal review, captions, FUNDING SOURCE
+
 \IEEEpubidadjcol
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -220,16 +222,6 @@ Note that in Eq.~(\ref{eq:phik}) we have utilized the expression for a standard 
 We use the expression for the moving GMM defined in Definition~\ref{def:movement} (i.e., GMM with variable centers and mixing coefficients) in the next section.
 
 
-
-
-
-
-
-
-
-
-
-
 \subsection{Scaled ergodic control}
 \label{sec:sol}
 \noindent
@@ -289,7 +281,7 @@ The dynamics in Eq.~(\ref{eq:dyn}) represent a 2D single integrator system, whic
 
 The problem is formulated to determine the displacement and probability for each Gaussian and the optimal (i.e., ergodic) control, ensuring that the displacement and probability deviate minimally from the ideal case. Note that the Gaussians represent the history of the explored space. For practical purposes, a defined horizon $N \in \mathbb{N}_{>0}$ is used, and the optimization is iterated for each horizon using a methodology similar to an MPC controller, where $\mathcal{T}$ in Eq.~(\ref{eq:ck}) denotes the interval between $t$ and $t-N$ (with $N$ not to be confused with the history window $h$).
 
-Large-scale exploration is considered complete when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to configure the problem so that exploration continues indefinitely or for extended periods, as discussed in~\cite{seewald2022energy}. %TODO!
+Large-scale exploration is considered complete when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to configure the problem so that exploration continues indefinitely or for extended periods, as discussed in~\cite{seewald2024energy}. 
 
 Additional practical considerations, such as the choice of history and the size of the moving GMM, are detailed in the next section.
 
@@ -328,20 +320,15 @@ In the following sections, Sec.~\ref{sec:res1} presents experimental results fro
 \end{figure}
 
 
-
-
 \subsection{Simulated forest}\label{sec:res1}
 \noindent
-Simulated results are conducted in a forest with 45 trees randomly distributed across an area of 3~600 square meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time steps when a desired coverage threshold is achieved within a specified approximation (i.e., 60\%~$\pm$5\%). The number of Gaussians $n$ is set to five, with the initial positions centered in the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, consistent with other ergodic controllers in the literature~\cite{seewald2022energy}. %todo
+Simulated results are conducted in a forest with 45 trees randomly distributed across an area of 3~600 square meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time steps when a desired coverage threshold is achieved within a specified approximation (i.e., 60\%~$\pm$5\%). The number of Gaussians $n$ is set to five, with the initial positions centered in the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, consistent with other ergodic controllers in the literature~\cite{seewald2024energy}. 
 
 Fig.~\ref{fig:1} presents the results for the simulated forest at distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (on the right) after 1~000 time steps. The history is illustrated with a dark red line, and the current point is marked by a dark red dot. The top-left of the figure depicts the underlying information density distribution (i.e., the moving GMM from Definition~\ref{def:movement}), including a detail of the five Gaussian components in the area representing the current history interval. The optimal values of the Gaussian centers $\boldsymbol{\mu}$ and the mixing coefficients $\boldsymbol{\alpha}$ ensure that the moving GMM represents the history (i.e., the expected value and covariance of the trajectory over the current history window) while minimizing deviation to avoid obstacles. The bottom-left of the figure displays the coverage map, where each square counts the number of points within it at a given time.
 
 Fig.~\ref{fig:1-2} shows the trajectory at time instant 2~500. The simulated UAV continues navigating through the obstacles, further exploring the state space. The moving GMM is shown on the top right, and the coverage map is displayed at the bottom right.
 
 Fig.~\ref{fig:1-3} shows the trajectory at time instant 10~000. As with the previous figures, the moving GMM model and coverage map are illustrated at the top-left and bottom-left, respectively. It is observed that while the obstacles are generally avoided, the simulated UAV occasionally comes close to or passes through obstacles. A relationship between the degree of obstacle avoidance and coverage is reported, as discussed in the following section.
-
-
-
 
 
 \begin{figure}[t!]
@@ -357,6 +344,7 @@ Fig.~\ref{fig:1-3} shows the trajectory at time instant 10~000. As with the prev
   \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
 \end{figure}
 
+
 \subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
 \noindent
 The OCP formulated in Eq.~(\ref{eq:ocp}) may not always yield an optimal solution. In such cases, our algorithm provides a sub-optimal solution where the constraint in Eq.~(\ref{eq:const}) may not be fully respected. For example, in the simulated trees scenario described in Sec.~\ref{sec:res1}, obstacles may not be avoided within the desired threshold. We observed this behavior during the initial iterations of our scaled ergodic methodology. However, by tuning our approach using the concept of history $h$, we can improve obstacle avoidance as a by-product of our method.
@@ -364,6 +352,7 @@ The OCP formulated in Eq.~(\ref{eq:ocp}) may not always yield an optimal solutio
 Fig.~\ref{fig:0} presents our experimental results, highlighting the trade-offs between built-in obstacle avoidance capabilities and coverage, along with a collision metric. The collision metric $c_e$ is designed to count every occurrence where a point violates the constraint in Eq.~(\ref{eq:const}) within a given threshold. The count of violations is shown on the left y-axis of the figure. With a horizon set to 50~000, the invalidation ratio for a history window of zero is only 0.044\%, whereas it increases to 0.46\% for a history window of 1~000. The threshold for invalidation is set to 60 centimeters. Coverage is calculated as described in Sec.~\ref{sec:res1}. Note that full coverage is not achieved since obstacles are included in the overall coverage metric.
 
 The top of the figure shows the three metrics on a logarithmic scale. We observed that a history window of 100 provides the best trade-off between obstacle avoidance (0.14\%) and coverage metrics. The bottom of the figure displays a detailed view of the history window around 100, $\pm$25.
+
 
 \subsection{Outdoors model}\label{sec:res3}
 \noindent
@@ -376,10 +365,12 @@ Physical experimental evaluation was performed on an initial segment of the over
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion and Future Directions}\label{sec:conc}
 \noindent
-.
+This paper addresses the problem of large-scale robotic exploration using ergodic control, overcoming limitations of existing ergodic controllers in terms of scalability and required information measures. We formulate the problem as one of scaled ergodic control, where a moving GMM represents the history of explored areas. Our methodology leverages an MPC-based ergodic controller to focus exploration on low-information density regions (as opposed to high-density areas) while minimizing deviations of the GMM components and providing a tunable degree of obstacle avoidance as a "by-product." A notable  additional difference from previous work in ergodic control is that we do not require a priori user-defined information measures or an external obstacle avoidance methodology built on top of the ergodic controller.
 
-~
-\newpage
+Our experimental results are conducted in various large-scale simulated environments, including a forest and an agricultural field surrounded by dense vegetation. The experiments highlight a balance between coverage efficiency and obstacle avoidance, with trade-offs being determined by the size of the history window, which is a given parameter that can be set depending on the desired value of coverage/obstacle avoidance. Physical evaluation has been performed on an initial portion of the trajectory, and further physical experiments are ongoing: we are extending the results to a real-world agricultural use case, where ergodic controllers assist in detecting target species (i.e., pests and pathogens). Future work will focus on refining the physical experiments and integrating with a more varied range of flight controllers, aiming to improve long-term exploration capabilities. This includes the use of energy-aware ergodic controllers~\cite{seewald2024energy,naveed2024eclares} and addressing planning and scheduling trade-offs for more specific coverage use cases~\cite{seewald2022energy,seewaldphdthesis}.
+
+
+
 
 {\small
 \bibliographystyle{IEEEtran} 
