@@ -95,7 +95,7 @@
 
 \author{Adam Seewald${}^{\text{1}}$, Ian Abraham${}^{\text{2}}$, and Stefano Mintchev${}^{\text{1}}$
   \thanks{%This work was partly supported by ETH Z{\"u}rich's World Food System Center and Yale University.
-  This work was supported by the Smart Sustainable Farming Research Program (fenaco, World Food Systems Center) and the Swiss National Science Foundation (Eccellenza Grant \textnumero 186865).}
+  This work was supported by the Smart Sustainable Farming Research Program (fenaco under World Food Systems Center) and the Swiss National Science Foundation (Eccellenza Grant \textnumero~186~865).}
   \thanks{${}^{\text{1}}$A.\hspace*{.4ex}S. and S.\hspace*{.4ex}M. are with the Department of Environmental Systems Science, ETH Z{\"u}rich and with the Swiss Federal Institute for Forest, Snow and Landscape Research (WSL), Birmensdorf ZH, Switzerland. Email:~{\tt\footnotesize \href{mailto:aseewald@ethz.ch}{aseewald@ethz.ch};}}
   \thanks{${}^{\text{2}}$I.\hspace*{.4ex}A. is with the Department of Mechanical Engineering and Materials Science, Yale University, CT, USA.}
 }
@@ -133,7 +133,7 @@ Existing ergodic controllers have been studied from the point of view of time~\c
 \begin{figure}
   \centering
   \input{figures/ilabs.pdf_tex}
-  \caption{\textbf{.}   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption{\textbf{Illustrative use case of a general scaled ergodic controller}. A drone explores a large-scale state space using a moving Gaussian mixture model, with the information density (3D plot) derived from the exploration history (points $\mathbf{x}(t-h)$ to $\mathbf{x}(t)$), dynamically avoiding obstacles (the tree).}
 \end{figure}
 
 Ergodic control is a planning and controls methodology that derives robot trajectories maximizing a given information measure so that robots spend more time in areas with high information measure while quickly traversing areas with low information measure~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. As a consequence, it is required that the user provides an information measure a priori or that the information measure is derived as the robots gather more information about their surroundings. While applicable to some use cases, this is often a limitation of the existing ergodic controllers. It is not always the case that the information measure can be easily refined from the gathered data, or that an a priori information measure can be provided at all. Furthermore, it is also not always feasible to define an information measure for large-scale spaces, % in practice. 
@@ -255,8 +255,8 @@ The scaled ergodic control problem is thus framed as finding an ergodic controll
 
 
 \begin{figure}[t!]
-  \begin{minipage}[t!]{.25\columnwidth}
-    \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   . }
+  \begin{minipage}[t!]{.26\columnwidth}
+    \caption[Trade-offs between obstacle avoidance and coverage]{\textbf{Obstacle avoidance and co- verage trade-offs}. This~figure illustrates~the~relation- ship between~the size of the history window and~two key metrics:~obsta- cle avoidance and coverage.~The~col- lision metric~$e_c$ quantifies occurren- ces of constraint violations, with~the left y-axis~display- ing the invalidation ratio for various~hi- story window~sizes, from~~~25~~~to~~~225}
     \label{fig:0}
   \end{minipage}\hspace*{.3cm}
   \begin{minipage}[t!]{.7\columnwidth}
@@ -264,7 +264,7 @@ The scaled ergodic control problem is thus framed as finding an ergodic controll
     \input{figures/compare.pdf_tex}
   \end{minipage}
   \vspace*{-.4cm}
-  \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption*{\footnotesize (linear scale on the bottom) and from 1 to 1000 (logarithmic scale on the top) The coverage metric, calculated based on the area explored (excluding obstacles), is presented on the right y-axis. Optimal trade-offs are observed with a history window of approximately 100, where the balance between obstacle avoidance and coverage is most effectively achieved.}
 \end{figure}
 
 Let us consider a modified expression for the center of the Gaussian
@@ -299,24 +299,23 @@ Additional practical considerations, such as the choice of history and the size 
 
 \begin{figure}[t!]
   \centering
+  \vspace*{-.3cm}
   \begin{subfigure}[t]{\linewidth}
   \hspace*{-.15cm}\input{figures/__steps_1.pdf_tex}
-  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption{The trajectory, the underlying information measure, and the coverage reported after 1~000 time steps.}
   \label{fig:1-1}
   \end{subfigure}
-  \vspace*{.1cm}
   \begin{subfigure}[t]{\linewidth}
   \hspace*{-.15cm}\input{figures/_steps_2.pdf_tex}
-  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption{After 2~500 time steps.}
   \label{fig:1-2}
   \end{subfigure}
-  \vspace*{.1cm}
   \begin{subfigure}[t]{\linewidth}
   \hspace*{-.15cm}\input{figures/_steps_3.pdf_tex}
-  \caption{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption{After 10~000 time steps.}
   \label{fig:1-3}
   \end{subfigure}
-  \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \caption{\textbf{UAV exploration in a simulated forest with 45 trees over an area of 3,600 square meters}. The figure shows the UAV's trajectory and the underlying information density distribution at various time steps.}
   \label{fig:1}
 \end{figure}
 
@@ -332,15 +331,17 @@ In the following sections, Sec.~\ref{sec:res1} presents experimental results fro
 
 \begin{figure}[t!]
   \begin{minipage}[t!]{.67\columnwidth}
+    \vspace*{-.15cm}
     \hspace*{.1cm}\input{figures/phys.pdf_tex}
-  \end{minipage}\hspace*{.6cm}
-  \begin{minipage}[t!]{.25\columnwidth}
-    \caption[.]{\textbf{.   }.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \end{minipage}\hspace*{.15cm}
+  \begin{minipage}[t!]{.31\columnwidth}
+    \caption[.]{\textbf{Outdoors model of a large-scale vegetated~area featuring our ergodic controller}. The~figure illustrates the UAV's trajectory over a 10~000 square-meter area located in Birmensdorf,~Switzerland. The~area features both dense vegetation and an agricultural setting. The dark red line represents the exploration history, while the dark red dot marks the~~UAV's~~cur-
+    }
     \vspace*{-.2cm}
     \label{fig:2}
   \end{minipage}
-  \vspace*{-.2cm}
-  \caption*{\footnotesize .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .}
+  \vspace*{-.18cm}
+  \caption*{\footnotesize rent position. The problem is posed so that the modeled UAV operates at an altitude of 2.5 meters, avoiding tree trunks but not smaller bushes. The dynamics are adjusted to reflect real-world conditions, with the exploration history set to 150 time steps.}
 \end{figure}
 
 \subsection{Simulated forest}\label{sec:res1}
