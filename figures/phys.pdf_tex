@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{160.40802765bp}%
+    \setlength{\unitlength}{150.40802765bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
