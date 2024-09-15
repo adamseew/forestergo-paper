@@ -56,7 +56,7 @@
     \setlength\tabcolsep{0pt}%
 
 
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/_ilabs.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/_ilabs_compressed.pdf}}%
     \put(0.36650428,0.38829829){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mathbf{x}(t-h)$\end{tabular}}}}%
     \put(0.36450428,0.39029829){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\mathbf{x}(t-h)$\end{tabular}}}}%
 
