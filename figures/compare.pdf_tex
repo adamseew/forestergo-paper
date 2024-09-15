@@ -60,10 +60,12 @@
     \put(0.58257399,0.5327028){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10${}^{\text{2}}$\end{tabular}}}}%
     \put(0.8280385,0.5327028){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}10${}^{\text{3}}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/compare.pdf}}%
+    {\color{blue} 
     \put(0.05275023,0.57894973){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.3\end{tabular}}}}%
     \put(0.05275023,0.69041659){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
     \put(0.05275023,0.8018838){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.5\end{tabular}}}}%
     \put(0.05275023,0.91335066){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    }
     \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/compare.pdf}}%
     \put(0.87760561,0.57894973){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize\color{red} 0\end{tabular}}}}%
     \put(0.87760561,0.69041659){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize\color{red} 100\end{tabular}}}}%
@@ -75,18 +77,20 @@
     \put(0.55055688,0.06691326){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}150\end{tabular}}}}%
     \put(0.73554463,0.06691326){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}200\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/compare.pdf}}%
+    {\color{blue} 
     \put(0.05275023,0.10225054){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.3\end{tabular}}}}%
     \put(0.05275023,0.2137174){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.4\end{tabular}}}}%
     \put(0.05275023,0.32518461){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.5\end{tabular}}}}%
     \put(0.05275023,0.43665147){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0.6\end{tabular}}}}%
+    }
     \put(0,0){\includegraphics[width=\unitlength,page=6]{figures/compare.pdf}}%
     \put(0.87760561,0.10225054){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{red}\scriptsize 0\end{tabular}}}}%
     \put(0.87760561,0.2137174){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{red}\scriptsize 100\end{tabular}}}}%
     \put(0.97187161,0.38282723){\rotatebox{-90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize\color{red}collision ($e_c$)\end{tabular}}}}}%
     \put(0.9729954,0.86371458){\color[rgb]{1,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\scriptsize\color{red}collision ($e_c$)\end{tabular}}}}}%
-    \put(0.01814535,0.16800442){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}coverage (\%)\end{tabular}}}}}%
+    \put(0.01814535,0.16800442){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{blue} coverage (\%)\end{tabular}}}}}%
     \put(0.42264092,0.00514422){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}history ($h$)\end{tabular}}}}%
-    \put(0.01551396,0.64320723){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}coverage (\%)\end{tabular}}}}}%
+    \put(0.01551396,0.64320723){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{blue} coverage (\%)\end{tabular}}}}}%
     \put(0.87760561,0.32518461){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{red}\scriptsize 200\end{tabular}}}}%
     \put(0.87760561,0.43665147){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\color{red}\scriptsize 300\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/compare.pdf}}%
