@@ -1,0 +1,112 @@
+%% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'figures/calinon.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{347.82436752bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.45219743)%
+    \lineheight{1}%
+    \scriptsize
+    \setlength\tabcolsep{0pt}%
+    \put(0.12732437,0.06906407){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x (m)\end{tabular}}}}%
+    \put(0.65785961,-0.01945973){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x (m)\end{tabular}}}}%
+    \put(-0.03452139,0.23043477){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}y (m)\end{tabular}}}}}%
+    \put(0.30426036,0.22925621){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}y (m)\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/calinon.pdf}}%
+    \put(0.01287776,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.52444617,0.44081348){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}A\end{tabular}}}}%
+    \put(0.74804648,0.44072321){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}B\end{tabular}}}}%
+    \put(0.74642836,0.22661093){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}E\end{tabular}}}}%
+    \put(0.96964024,0.2260304){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.52273061,0.22759527){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}D\end{tabular}}}}%
+    \put(0.06284359,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.11289785,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.1629521,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.21300635,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.26893104,0.09252403){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\\\end{tabular}}}}%
+    \put(-0.01625395,0.12292518){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(-0.0223012,0.21969575){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(-0.0223012,0.26808101){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(-0.0223012,0.31645558){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(-0.01643075,0.36484087){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(-0.02230118,0.1713105){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.346498,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.38472295,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.4230363,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.46134966,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.49966301,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.5438468,0.00513576){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\\\end{tabular}}}}%
+    \put(0.57068244,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.6089074,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.64722075,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.6855341,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.72384746,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.76803125,0.00515912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\\\end{tabular}}}}%
+    \put(0.79764284,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.83586779,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.87418114,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.9124945,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.95080785,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.99499164,0.00534451){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\\\end{tabular}}}}%
+    \put(0.32204253,0.25205741){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.31599528,0.32612941){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.31599528,0.36316542){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.31599528,0.40019073){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.32186573,0.43722678){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.31599533,0.28909328){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0.32075146,0.03377356){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.31470421,0.10784566){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
+    \put(0.31470421,0.1448817){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
+    \put(0.31470421,0.18190707){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
+    \put(0.32057466,0.21894315){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.31470426,0.07080985){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/calinon.pdf}}%
+    \put(0.9672428,0.44182477){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}C\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
