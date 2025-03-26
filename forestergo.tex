@@ -54,7 +54,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[red,rotate=45,scale=10,opacity=0.2] at (current page.center) {\small\fontfamily{phv}\selectfont%};
 %     IN~PREPARATION
-      UNDER~REVIEW
+%     UNDER~REVIEW
 };   
   \end{tikzpicture}
 }
@@ -143,7 +143,7 @@ Ergodic control is a planning and controls methodology that derives robot trajec
 \begin{figure}
   \centering
   \input{figures/ilabs.pdf_tex}
-  \caption{\textbf{Illustrative use case of a general scaled ergodic controller}. A drone explores an unknown state space using an adaptative Gaussian mixture model, with the information density (3D plot) derived from the exploration history (points $\mathbf{x}(t-h)$ to $\mathbf{x}(t)$), dynamically avoiding obstacles (the tree).}
+  \caption{\textbf{Illustrative use case of our model agnostic ergodic controller}. A drone explores an unknown state space using an Adaptative Gaussian Mixture Model, with the information density (3D plot) derived from the exploration history (points $\mathbf{x}(t-h)$ to $\mathbf{x}(t)$), dynamically avoiding obstacles (the tree).}
   \label{fig:-1}
   \vspace*{-.1cm}
 \end{figure}
@@ -309,13 +309,13 @@ Additional practical considerations, such as the choice of history and the size 
 \end{figure}
 
 \begin{figure}[b!]
-  \begin{minipage}[t!]{.46\columnwidth}
+  \begin{minipage}[t!]{.35\columnwidth}
     \caption[.]{\textbf{Evolution of coverage over time for different history windows.} Larger history windows result in slower initial coverage due to the increased influence of past trajectory data but lead to more stable long-term coverage. Over time, the differences diminish as all configurations converge toward their respective steady-state behaviors.}
     \label{fig:time-vs-cov}
-  \end{minipage}\hspace*{.3cm}
-  \begin{minipage}[t!]{.5\columnwidth}
+  \end{minipage}\hspace*{.63cm}
+  \begin{minipage}[t!]{.6\columnwidth}
     \vspace*{-.3cm}
-    \input{figures/cov_vs_time.pdf_tex}
+    \hspace*{.1cm}\input{figures/cov_vs_time2.pdf_tex}
   \end{minipage}
 \end{figure}
 
@@ -370,7 +370,7 @@ Fig.~\ref{fig:0} presents our experimental results, highlighting the trade-offs 
 
 The top of the figure shows the three metrics on a logarithmic scale. We observed that a history window of 100 provides the best trade-off between obstacle avoidance (0.14\%) and coverage metrics. The bottom of the figure displays a detailed view of the history window around 100, $\pm$25.
 
-Fig.~\ref{fig:time-vs-cov} shows the evolution over coverage in time for all the history windows in Fig.~\ref{fig:0}. Larger history windows tend to have a lower initial coverage as more trajectort hisory data have are processed to derive the adaptive ergodic controller, but they eventually lead to a more stable coverage rate as the exploration continues.
+Fig.~\ref{fig:time-vs-cov} shows the evolution over coverage in time for all the history windows in Fig.~\ref{fig:0}. Larger history windows tend to have a lower initial coverage as more trajectort hisory data have are processed to derive the adaptive ergodic controller, but they eventually lead to a more stable coverage rate as the exploration continues. The figure furthermore shows that the variance in coverage decreases over time, particularly for larger history windows.
 
 The data demonstrate that our method inherently incorporates a tunable degree of obstacle avoidance. However, in practice, even low collision rates could lead to mission-critical failures. It is thus noted that our method still requires an external obstacle avoidance methodology in use cases where collisions lead to critical failures. Nonetheless, compared to other methods in the literature, our approach maintains optimality (ergodicity) across the majority of the state space, thereby \textit{significantly reducing} the reliance on external obstacle avoidance techniques.
 
@@ -410,10 +410,9 @@ Physical experimental evaluation was performed on an initial segment of the over
 
 \subsection{Comparison with~\cite{calinon2020mixture}}\label{sec:res4}
 \noindent
-Comparative results are conducted against an existing ergodic controller in the literature to highlight the similarities between the derived information measure (ours) and the underlying information measure (literature). The underlying information measure (Fig.5 in\cite{calinon2020mixture}) is modified so that the resulting ergodic trajectory remains in areas with low information measure, enabling a quantitative comparison.
+Comparative results are conducted against an existing ergodic controller in the literature to highlight the similarities between the derived information measure (ours) and the underlying information measure (literature). The underlying information measure (Fig.~5 in~\cite{calinon2020mixture}) is modified so that the resulting ergodic trajectory remains in areas with low information measure, enabling a quantitative comparison.
 
-The left-most figure in Fig.~\ref{fig:c} illustrate the results as reported by~\cite{calinon2020mixture} using a coverage map, where each square represents the number of points within it at a given time. Darker squares indicate areas where the controller spends more time, while lighter squares correspond to areas where the controller spends less time (see Sec.~\ref{sec:res1}). The adaptive ergodic controller is then illustrated on the right, with different history windows A--F. Note that the adaptive ergodic controller is constructed without an underlying information measure. Instead, the original underlying distribution measure is treated as two unknown obstacles, each ``discovered'' when the controller comes into each obstacle's proximity. History windows A--C illustrate the evolution of coverage with a history window of 50$\pm$25, while D--F illustrate the evolution of coverage with a history window of 200$\pm$100, where history windows A--D all show relative high similarities with~\cite{calinon2020mixture}.
-
+The left-most figure in Fig.~\ref{fig:c} illustrates the results as reported by~\cite{calinon2020mixture} using a coverage map, where each square represents the number of points within it at a given time. Darker squares indicate areas where the controller spends more time, while lighter squares correspond to areas where the controller spends less time (see Sec.~\ref{sec:res1}). The adaptive ergodic controller is then illustrated on the right, with different history windows A--F. Note that the adaptive ergodic controller is constructed without an underlying information measure. Instead, the original underlying distribution measure is treated as two unknown obstacles, each ``discovered'' when the controller comes into each obstacle's proximity. History windows A--C illustrate the evolution of coverage with a history window of 50$\pm$25. The reported coverage is then 25.74\%, 27.41\%, and 30.89\% for A, B, and C. D--F illustrate the evolution of coverage with a history window of 200$\pm$100. The reported coverage is then 20.39\%, 20.74\%, and 20.01\%. The history windows A--D all show relative high similarities with~\cite{calinon2020mixture}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion and Future Directions}\label{sec:conc}

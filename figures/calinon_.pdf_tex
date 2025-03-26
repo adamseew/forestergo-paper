@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'figures/calinon.pdf' (pdf, eps, ps)
+%% Accompanies image file 'figures/calinon_.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -58,15 +58,14 @@
     \put(0.65785961,-0.01945973){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x (m)\end{tabular}}}}%
     \put(-0.03452139,0.23043477){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}y (m)\end{tabular}}}}}%
     \put(0.30426036,0.22925621){\color[rgb]{1,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}y (m)\end{tabular}}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/calinon.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/calinon_.pdf}}%
     \put(0.01287776,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
     \put(0.52444617,0.44081348){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}A\end{tabular}}}}%
     \put(0.37338325,0.44007457){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$h$=25\end{tabular}}}}%
     \put(0.74804648,0.44072321){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}B\end{tabular}}}}%
     \put(0.746508,0.22755956){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}E\end{tabular}}}}%
-    \put(0.97028727,0.22719849){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.97009646,0.22874122){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
     \put(0.52273061,0.22759527){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}D\end{tabular}}}}%
-    \put(0.23262479,0.36851389){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\cite{calinon2020mixture}\end{tabular}}}}%
     \put(0.06284359,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
     \put(0.11289785,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.4\end{tabular}}}}%
     \put(0.1629521,0.09252404){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.6\end{tabular}}}}%
@@ -108,7 +107,7 @@
     \put(0.31470421,0.18190707){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.8\end{tabular}}}}%
     \put(0.32057466,0.21894315){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
     \put(0.31470426,0.07080985){\color[rgb]{1,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}.2\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/calinon.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/calinon_.pdf}}%
     \put(0.96703817,0.44112137){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}C\end{tabular}}}}%
     \put(0.59247457,0.44007403){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$h$=50\end{tabular}}}}%
     \put(0.81271259,0.43976127){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$h$=75\end{tabular}}}}%
