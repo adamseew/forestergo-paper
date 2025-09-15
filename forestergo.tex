@@ -112,7 +112,7 @@
 
 %\vspace*{.5cm}
 \begin{abstract}
-  The problem of exploring unknown spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data, e.g., vision, positioning, etc., have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers alone often encounter limitations when applied to unknown areas, as they require a predefined information measure. This paper introduces a general and model agnostic ergodic control methodology designed to overcome these limitations. Unlike traditional ergodic controllers, our approach dynamically derives an information measure from sensory data and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including those featuring dense vegetation, precision agriculture, etc., demonstrate the effectiveness of our model agnostic ergodic controller, showcasing the applicability of our methodology compared to conventional techniques typically restricted to %structured spaces or 
+  The problem of exploring unknown spaces with robots arises in many real-world applications. While different approaches exist, those utilizing sensory data, e.g., vision, positioning, etc., have emerged as of particular interest. Among these, ergodic control is significant, as it accounts for both motion cost and optimality. However, ergodic controllers alone often encounter limitations when applied to unknown areas, as they require a predefined information measure. This paper introduces a general and model-agnostic ergodic control methodology designed to overcome such limitations. Unlike traditional ergodic controllers, our approach dynamically derives an information measure from sensory data and derives a degree of obstacle avoidance as a ``by-product.'' Empirical data from simulations in diverse environments, including those featuring dense vegetation, precision agriculture, etc., demonstrate the effectiveness of our model-agnostic ergodic controller, showcasing the applicability of our methodology compared to conventional techniques typically restricted to %structured spaces or 
   spaces where an information measure is readily available.
 \end{abstract}
 
@@ -139,8 +139,8 @@ spaces with robots is a problem commonly addressed by different methodologies ar
 %
 While there are different approaches in the literature, approaches that are informed by sensory data have emerged as of particular interest. Among these approaches, ergodic control is a significant result, as it provides a more natural way of searching through deterministic exploratory behaviors while accounting for both the motion cost and optimality~\cite{miller2016ergodic}.
 
-Ergodic control is a planning and controls methodology that derives robot trajectories maximizing a given information measure, i.e., a distribution that encodes where information is expected to be found, so that robots spend more time in areas with high information while quickly traversing areas with low information~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. %As a consequence, it is required that the user provides an information measure, a priori or that an \textit{existing} information measure is refined as the robots gather more information about their surroundings. 
-As a consequence, it is required that the user provides an a priori information measure, which can then be refined as the robots gather more information about their surroundings. 
+Ergodic control is a planning and control methodology that derives robot trajectories maximizing a given information measure, i.e., a distribution that encodes where information is expected to be found, so that robots spend more time in areas with high information while quickly traversing areas with low information~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}. %As a consequence, it is required that the user provides an information measure, a priori or that an \textit{existing} information measure is refined as the robots gather more information about their surroundings. 
+As a consequence, it is required that the user provide an a priori information measure, which can then be refined as the robots gather more information about their surroundings. 
 While applicable to some use cases, this is often a limitation of the existing ergodic controllers. It is not always the case that the information measure can be easily refined from the gathered data, or that an a priori information measure can be provided at all. 
 Furthermore, it is also not always feasible to define an information measure for large-scale and/\textit{or} unknown spaces in practice, since constructing such a measure requires prior knowledge of the environment that may not be available. Here, with ``large-scale'' we refer to spaces on the order of dozens or even hundreds of meters.
 %Furthermore, it is also not always feasible to define an information measure for large-scale and/or unknown spaces in practice, where with ``large-scale'' we refer to spaces on the order of dozens or even hundreds of meters. 
@@ -148,23 +148,22 @@ Furthermore, it is also not always feasible to define an information measure for
 \begin{figure}
   \centering
   \input{figures/ilabs.pdf_tex}
-  \caption{\textbf{Illustrative use case of our model agnostic ergodic controller}. A drone explores an unknown state space using an Adaptive Gaussian Mixture Model, with the information density (3D plot) derived from the exploration history (points $\mathbf{x}(t-h)$ to $\mathbf{x}(t)$), dynamically avoiding obstacles (the tree).}
+  \caption{\textbf{Illustrative use case of our model-agnostic ergodic controller}. A drone explores an unknown state space using an Adaptive Gaussian Mixture Model, with the information density (3D plot) derived from the exploration history (points $\mathbf{x}(t-h)$ to $\mathbf{x}(t)$), dynamically avoiding obstacles (the tree).}
   \label{fig:-1}
   \vspace*{-.1cm}
 \end{figure}
 
 Existing ergodic controllers have been studied from the point of view of time~\cite{dong2023time} and energy~\cite{seewald2024energy,naveed2024eclares} optimality and applied to a multitude of use cases. These use cases include tactile sensing~\cite{abraham2017ergodic}, active learning~\cite{abraham2021ergodic}, learning from demonstration~\cite{kalinowska2021learning}, human-robot interaction~\cite{fitzsimons2019ergodicity,fitzsimons2022ergodic}, multi-objective optimality~\cite{ren2023pareto,srinivasan2023multi}, grasping and manipulation~\cite{shetty2022ergodic,bilaloglu2023whole}, and visual rendering~\cite{low2022drozbot,prabhakar2020autonomous}. Ergodic controllers in the literature feature diverse aspects such as stochastic dynamics~\cite{torre2016ergodic,ayvali2017ergodic} and multi-agent and/or swarm control with both centralized~\cite{seewald2024energy,rao2024learning} and distributed information processing~\cite{prabhakar2020ergodic,coffin2022multi}. Although some of these use cases involve information gathering~\cite{dressel2018optimality} and feature urban environments and other 
 environments with potentially unknown underlying distributions %potentially large-scale problems~
-\cite{prabhakar2020ergodic,rao2023multi}, a generic model agnostic ergodic controller has not been studied yet. Even though recent methods have been making progress in this direction~\cite{whittemeyer2023bi,seewald2024energy,naveed2024eclares,dong2023time,ivic2022constrained}, these methods do not scale efficiently due to the formulation of the underlying optimization (i.e., extending the state space requires a larger optimization horizon) and still require an a priori information measure. From an obstacle avoidance perspective, even though there are ergodic controllers that feature obstacle avoidance~\cite{lerch2023safety,prabhakar2020ergodic}, this is an external component on top of the ergodic controller that then results in a sub-ergodic solution~\cite{dong2023time} rather than an integral component of the explorer itself.
+\cite{prabhakar2020ergodic,rao2023multi}, a generic model-agnostic ergodic controller has not been studied yet. Even though recent approaches have been making progress in this direction~\cite{whittemeyer2023bi,seewald2024energy,naveed2024eclares,dong2023time,ivic2022constrained}, these approaches do not scale efficiently due to the formulation of the underlying optimization (i.e., extending the state space requires a larger optimization horizon) and still require an a priori information measure. From an obstacle avoidance perspective, even though there are ergodic controllers that feature obstacle avoidance~\cite{lerch2023safety,prabhakar2020ergodic}, this is an external component on top of the ergodic controller that then results in a sub-ergodic solution~\cite{dong2023time} rather than an integral component of the explorer itself.
 
 %With this work, we address this challenge, with a general and model agnostic ergodic control methodology that can be applied to a broader class of robotic use cases. Our methodology does not require an underlying information measure but rather, derives an information measure from the exploration itself and refines such a measure utilizing information about already visited areas and obstacles. %from sensory data. 
-With this work, we address this challenge by introducing a general and model-agnostic ergodic control methodology that is applicable beyond the standard formulations considered in prior work. 
-In contrast to existing ergodic control methodologies that solely rely on external obstacle avoidance techniques, e.g., control barrier functions~\cite{lerch2023safety}, RT-RRT*~\cite{prabhakar2020ergodic}, etc., for obstacle avoidance capabilities, our methodology provides additionally a tunable degree of obstacle avoidance as a ``by-product,'' reducing the reliance on external obstacle avoidance techniques.  
+With this work, we address the challenge of ergodically exploring a space with no available information measure by introducing a general and model-agnostic ergodic control methodology that is applicable beyond the standard formulations considered in prior work. Furthermore, in contrast to existing ergodic control methodologies that solely rely on external obstacle avoidance techniques, e.g., control barrier functions~\cite{lerch2023safety}, RT-RRT*~\cite{prabhakar2020ergodic}, etc., for obstacle avoidance capabilities, our methodology additionally provides a tunable degree of obstacle avoidance as a ``by-product,'' reducing the reliance on external obstacle avoidance techniques.  
 %
-The underlying information measure is represented utilizing an \textit{Adaptive Gaussian Mixture Model (AGMM)}, which is derived from the sensory data as the robot traverses the state space -- a process that is handled by our methodology and that does not require \textit{any} user input. Our ergodic formulation is different from existing methods. The problem is posed so that the robot spends time in areas with low information measures, whereas the ``explored space'' is related to high information measures. The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window.
+The underlying information measure is represented utilizing an \textit{Adaptive Gaussian Mixture Model (AGMM)}, which is derived from the sensory data as the robot traverses the state space -- a process that is handled by our methodology and that does not require \textit{any} user input. Our ergodic formulation is different from existing approaches. The problem is posed so that the robot spends time in areas with low information measures, whereas the ``explored space'' is related to high information measures. The methodology is iterative and utilizes a model predictive controller (MPC) approach, where the ergodic controller is refined within a specified time window.
 
 %\IEEEpubidadjcol
-We showcase our general and model agnostic ergodic control on a large-scale problem with an unknown underlying information measure: the problem of exploring a simulated forest and an outdoor area that has both dense vegetation in an agricultural field (see Figure~\ref{fig:-1}), in contrast to existing ergodic control methodologies that are demonstrated in structured environments or generally with a known information measure. Section~\ref{sec:res} shows the performance of our approach. The open-source software stack to replicate our approach and the experimental data are made available on our project repository webpage\footnote{Details omitted for double-blind reviewing.}.%\href{https://github.com/adamseew/scaledergo}{\tt github.com/adamseew/scaledergo}}.
+We showcase our general and model-agnostic ergodic control on a large-scale problem with an unknown underlying information measure: the problem of exploring a simulated forest and an outdoor area that is densely vegetated (see Figure~\ref{fig:-1}), in contrast to existing ergodic control methodologies that are demonstrated in structured environments or generally with a known information measure. Section~\ref{sec:res} shows the performance of our approach. The open-source software stack to replicate our approach and the experimental data are made available on our project repository webpage\footnote{Details omitted for anonymous review.}.%\href{https://github.com/adamseew/scaledergo}{\tt github.com/adamseew/scaledergo}}.
 
 The remainder of this paper is structured as follows. Sec.~\ref{sec:pb} provides the details of the underlying principles and the problem addressed. Sec.~\ref{sec:meth} is split into two sub-sections: one provides an overview of ergodic control, whereas the other details our methodology. Sec.~\ref{sec:conc} provides conclusions and draws future perspectives.
 
@@ -172,13 +171,18 @@ The remainder of this paper is structured as follows. Sec.~\ref{sec:pb} provides
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Formulation}\label{sec:pb}
 \noindent
-This work addresses the problem of exploring an unknown, bounded, and potentially large-scale state space. For practical reasons, we restrict the exploration space to one hectare. %and consider exploration. 
-However, the formulation is such that the state space could potentially be unbounded. %and not limited to two dimensions~\cite{dong2023time}.
+This work addresses the problem of exploring an unknown, bounded, and potentially large-scale state space. %For practical reasons, we restrict the exploration space to one hectare. %and consider exploration. 
+%However, the formulation is such that the state space could potentially be unbounded. %and not limited to two dimensions~\cite{dong2023time}.
+%
+Let us consider a %bounded 
+space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in this space except for a finite number of obstacles~represented by $\mathcal{O}\subset\mathcal{Q}$. The height of the robot is constrained by the relative height from the terrain. 
 
-Let us consider a bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is free to move in this space except for a finite number of obstacles~represented by $\mathcal{O}\subset\mathcal{Q}$. The height of the robot is constrained by the relative height from the terrain. In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas (i.e., with low information density) while avoiding the obstacles, i.e., $\mathcal{Q}\,\,\cap\,\,\mathcal{O}$, as opposed to other approaches featuring ergodic control in the literature where exploration happens in areas with high information density instead~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}.
+In the remainder, we utilize the concepts of ergodicity and ergodic metric to direct the robot into unexplored areas (i.e., with low information density) while avoiding the obstacles, i.e., $\mathcal{Q}\,\,\cap\,\,\mathcal{O}$, as opposed to other approaches featuring ergodic control in the literature where exploration happens in areas with high information density instead~\cite{mathew2011metrics,abraham2017ergodic,miller2013trajectory}.
 
 \begin{defn}[Ergodicity]
-  Given the bounded state space $\mathcal{Q}$, a trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} with respect to a spatial distribution $\phi$, or, analogously, is distributed among regions of high expected distribution, if and only if
+  Given the %bounded 
+  state space $\mathcal{Q}$, a trajectory $\mathbf{x}(t)\in\mathcal{Q}$ is \textit{ergodic} with respect to a spatial distribution $\phi$, or, %analogously, 
+  is distributed among regions of high expected distribution, if and only if
   \begin{equation}
     \lim_{t\rightarrow\infty}{\int_{\mathcal{Q}}\phi(\mathbf{x})\Omega(\mathbf{x})\,d\mathbf{x}=\frac{1}{t}\int_{\mathcal{T}}{{\Omega\big(\overline{\mathbf{x}}(t)\big)}}\,dt},
   \end{equation}
@@ -186,8 +190,8 @@ Let us consider a bounded space $\mathcal{Q}\subset\mathbb{R}^2$. The robot is f
 \end{defn}
 
 The spatial distribution $\phi$ is derived using an Adaptive Gaussian Mixture Model.
-\begin{defn}[Adaptive Gaussian Mixture Mode]\label{def:movement}
-  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in a Gaussian Micture Model, with an initial probability equally distributed. An \textit{Adaptive Gaussian Mixture Mode} is \begin{equation}
+\begin{defn}[Adaptive Gaussian Mixture Model]\label{def:movement}
+  Assume that there is a given number $n\in\mathbb{N}_{>0}$ of Gaussians $\mathcal{N}$ in a Gaussian Mixture Model, with an initial probability equally distributed. An \textit{Adaptive Gaussian Mixture Model} is \begin{equation}
     \phi(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x}):=\sum_{i=1}^n{\alpha_i\,\mathcal{N}_i(\mathbf{x}\,|\,\mu_i,\Sigma_i)},
   \end{equation}
   where $\Sigma_i\in\mathbb{R}^{2\times 2}$ indicates the covariance matrix and $\mu_i\in\mathcal{Q}$ denotes the center of a Gaussian $\mathcal{N}_i$. 
@@ -224,7 +228,7 @@ This section details our methods. Sec.~\ref{sec:canon} introduces the concept of
 \subsection{Canonical ergodic control}
 \label{sec:canon}
 \noindent
-To quantify the time average and the average of the spatial distributions $\iota$ and $\phi$ respectively, we use Fourier series basis functions, a common method for evaluating distributions in the spectral domain~\cite{mathew2011metrics}. For the time average distribution, the coefficients of an equivalent basis function can be expressed as
+To quantify the time average and the average of the spatial distribution $\phi$, we use Fourier series basis functions, a common method for evaluating distributions in the spectral domain~\cite{mathew2011metrics}. For the time average distribution, the coefficients of an equivalent basis function can be expressed as
 \begin{equation}\label{eq:ck}
   c_k\big(\mathbf{x}(t)\big):=\int_{\mathcal{T}}{\prod_{d\in\{1,2\}}}{\cos{\big(2\pi k_d\mathbf{x}_d(\tau)/T\big)}/T^2}\,d\tau/t,
 \end{equation}
@@ -238,7 +242,7 @@ For the average of the spatial distribution, the coefficients of an equivalent b
 \end{equation}
 where $c$ is the integrand in Eq.~(\ref{eq:ck}) at the given point $\mathbf{x}$, evaluated at the current time step.
 
-The aim of an ergodic controller is to minimize an ergodic metric, i.e., the $L^2$-inner product of the distributions $\iota$ and $\phi$ (see Definition~\ref{def:ergomet}). A consolidated metric~\cite{abraham2017ergodic,abraham2021ergodic,seewald2024energy,lerch2023safety,abraham2018decentralized,dong2023time} for this purpose is, for instance, \begin{equation}
+The aim of an ergodic controller is to minimize an ergodic metric, i.e., the $L^2$-inner product of the distribution $\phi$ (see Definition~\ref{def:ergomet}). A consolidated metric~\cite{abraham2017ergodic,abraham2021ergodic,dong2023time} for this purpose is, for instance, \begin{equation}
   \mathcal{E}(\mathbf{x}):=\sum_{k\in\mathcal{K}}{\Lambda_k(c_k-\phi_k)^2/2},
 \end{equation}
 where the coefficients of the time average and the average spatial distributions are expressed in Eq.~(\ref{eq:ck}--\ref{eq:phik}).
@@ -258,7 +262,7 @@ We use the expression for the AGMM defined in Definition~\ref{def:movement} (i.e
 \noindent
 To utilize the concept of an information density as a function of explored versus unexplored space, let us first consider Eq.~(\ref{eq:phik}) with the AGMM.
 
-Assume for practical purposes that the space is square, with a given length $l\in\mathbb{R}_{>0}$ expressed in meters. We then restrict the period in Eq.~(\ref{eq:ck}) to this search space and express $l$ as $T/2$. Eq.~(\ref{eq:phik}) can also be expressed as 
+Assume for practical purposes that the space is square, with a given length $l\in\mathbb{R}_{>0}$ expressed in meters. We then restrict the period in Eq.~(\ref{eq:ck}) to this search space and express $l$ as $T/2$. Eq.~(\ref{eq:phik}) can then be expressed as 
 \begin{equation}
   \phi_k(\boldsymbol{\alpha},\boldsymbol{\mu},\mathbf{x})\hspace*{-.6ex}:=\hspace*{-1ex}\int_{\mathcal{Q}}{\hspace*{-1ex}\Bigg(\hspace*{-.3ex}\sum_{d\in\{1,2\}}\hspace*{-.5ex}\sum_{i=1}^n\alpha_i\mathcal{N}_i\big(\mathbf{x\,|\,\overline{\rule{0pt}{2.4mm}{\mu_i}},\overline{\Sigma_i}}\big)\hspace*{-.5ex}\Bigg)\hspace*{-.1ex}c(\mathbf{x})\,d\mathbf{x}},
 \end{equation}
@@ -278,7 +282,7 @@ Let us consider a modified expression for the center of the Gaussian
 \begin{equation}
   \mu_i:=E\big(\mathbf{x}(t)\big)-e_i
 \end{equation}
-where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ represents a displacement that allows for ``moving'' the Gaussian components in the AGMM.
+where $e_i\in\mathbf{e}\subset\mathbb{R}^n$ represents a displacement that allows for ``moving'' the Gaussian components in the AGMM, and $\mathbf{e}$ is the set of all the displacements.
 
 Our methodology ensures that the scaled ergodic controller determines the minimum displacement of the Gaussians so that the space to be visited is delimited by $\mathcal{Q}\,\,\cap\,\,\mathcal{O}$. This controller can be formulated as an optimal control problem (OCP) 
 \begin{subequations}\label{eq:ocp}\begin{align}
@@ -287,7 +291,7 @@ Our methodology ensures that the scaled ergodic controller determines the minimu
   \mathbf{x}&(t)\in\mathcal{Q}\cap\mathcal{O},\,\mathbf{u}(t)\in\mathcal{U},\label{eq:const}\\
   \mathbf{x}&(t_0),n,\kappa,l,h,\text{ are given},\label{eq:ocpconsttotf}
 \end{align}\end{subequations}
-where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the AGMM, as functions of the control and the state. $R$ is a control penalizing diagonal positive-definite matrix. The function $\Psi$ maps the displacement to a cost value, e.g., 
+where the output of the optimization $\Theta$ in Eq.~(\ref{eq:cost}) is $\mathbf{x},\mathbf{u},\boldsymbol{\alpha},\boldsymbol{\mu}$, i.e., the center of each Gaussian and its mixing coefficient in the AGMM, as functions of the control and the state. $R$ is a control-penalizing diagonal positive-definite matrix. The function $\Psi$ maps the displacement to a cost value, e.g., 
 \begin{equation}
   \Psi(\mathbf{e}):=\sum_{e_i\in\mathbf{e}}|e_i|,
 \end{equation}
@@ -297,21 +301,9 @@ The dynamics in Eq.~(\ref{eq:dyn}) represent a 2D single integrator system, whic
 
 The problem is formulated to determine the displacement and probability for each Gaussian and the optimal (i.e., ergodic) control, ensuring that the displacement and probability deviate minimally from the ideal case. Note that the Gaussians represent the history of the explored space. For practical purposes, a defined horizon $N \in \mathbb{N}_{>0}$ is used, and the optimization is iterated for each horizon using a methodology similar to an MPC controller, where $\mathcal{T}$ in Eq.~(\ref{eq:ck}) denotes the interval between $t$ and $t-N$ (with $N$ not to be confused with the history window $h$).
 
-Large-scale exploration is considered complete when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to configure the problem so that exploration continues indefinitely or for extended periods, as discussed in~\cite{seewald2024energy}. 
+The exploration is considered complete when a desired level of coverage is achieved (see Sec.~\ref{sec:res}). It is also possible to configure the problem so that exploration continues indefinitely or for extended periods, as discussed in~\cite{seewald2024energy}. 
 
 Additional practical considerations, such as the choice of history and the size of the AGMM, are detailed in the next section.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results}\label{sec:res}
-\noindent
-This section provides an overview of our experimental setup and showcases the results. 
-Experiments are conducted using \textsc{Matlab}~(R), while interfaces for physical experimental evaluation are supported by a routine implemented in Python. The MPC optimization stack, which solves the OCP in Eq.~(\ref{eq:ocp}), relies on two external open-source components: the non-linear programming solver IPOPT~\cite{wachter2006implementation} and the algorithmic differentiation library CasADi~\cite{andersson2012casadi}.
-
-In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest of 3600~square~meters, serving as a representative scenario within the larger-scale problem discussed earlier. 
-%In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest with an area of 3600~square~meters. 
-Sec.~\ref{sec:res2} details our findings regarding the built-in obstacle avoidance capabilities of our general scaled ergodic controller compared to its coverage performance and discusses how the coverage evolves in time.Sec~\ref{sec:res4} presents our comparative experimental results utilizing another ergodic controller in the literature~\cite{calinon2020mixture}. Sec.~\ref{sec:res3} describes the %outdoor modeled results
-field experiments, featuring an area with dense vegetation in an agricultural field, including multiple obstacles and a total area of 1 hectare.
 
 
 \begin{figure}[t!]
@@ -354,6 +346,7 @@ field experiments, featuring an area with dense vegetation in an agricultural fi
 \end{figure}
 
 \begin{figure}[b!]
+  \vspace*{.2cm}
   \begin{minipage}[t!]{.35\columnwidth}
     \caption[.]{\textbf{Evolution of coverage over time for different history windows.} Larger history windows result in slower initial coverage due to the increased influence of past trajectory data but lead to more stable long-term coverage. Over time, the differences diminish as all configurations converge toward their respective steady-state behaviors.}
     \label{fig:time-vs-cov}
@@ -364,9 +357,20 @@ field experiments, featuring an area with dense vegetation in an agricultural fi
   \end{minipage}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results}\label{sec:res}
+\noindent
+This section provides an overview of our experimental setup and showcases the results. 
+Experiments are conducted using \textsc{Matlab}~(R), while interfaces for physical experimental evaluation are supported by a routine implemented in Python. The MPC optimization stack, which solves the OCP in Eq.~(\ref{eq:ocp}), relies on two external open-source components: the non-linear programming solver IPOPT~\cite{wachter2006implementation} and the algorithmic differentiation library CasADi~\cite{andersson2012casadi}.
+
+In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest of 3600~square~meters, serving as a representative scenario within the larger-scale problem discussed earlier. 
+%In the following sections, Sec.~\ref{sec:res1} presents experimental results from a simulated forest with an area of 3600~square~meters. 
+Sec.~\ref{sec:res2} details our findings regarding the built-in obstacle avoidance capabilities of our general scaled ergodic controller compared to its coverage performance and discusses how the coverage evolves in time. Sec~\ref{sec:res4} presents our comparative experimental results utilizing another ergodic controller in the literature~\cite{calinon2020mixture}. Sec.~\ref{sec:res3} describes the %outdoor modeled results
+field experiments, featuring an area with dense vegetation, including multiple obstacles and a total area of 1~hectare.
+
 \subsection{Simulated forest}\label{sec:res1}
 \noindent
-Simulated results are conducted in a forest with 45 trees randomly distributed across an area of 3600 square meters. The history $h$ is set to 100 time steps (see Sec.~\ref{sec:res2}) following a rigorous parameters identification where multiple sets of parameters have been evaluated for accuracy vs. obstacle avoidance capabilities (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time steps when a desired coverage threshold is achieved within a specified approximation (i.e., 60\%~$\pm$5\%). The number of Gaussians $n$ is set to five, with the initial positions centered in the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, consistent with other ergodic controllers in the literature~\cite{seewald2024energy,calinon2020mixture,dong2023time}. 
+Simulated results are conducted in a forest with 45 trees randomly distributed across an area of 3600 square meters. The history $h$ is set to 100 time steps following a rigorous parameters identification where multiple sets of parameters have been evaluated for accuracy vs. obstacle avoidance capabilities (see Sec.~\ref{sec:res2}). The simulation is terminated at 50~000 time steps when a desired coverage threshold is achieved within a specified approximation (i.e., 60\%~$\pm$5\%). The number of Gaussians $n$ is set to five, with the initial positions centered in the middle of the state space. The number of frequencies $\kappa$ is set to nine, excluding the base frequency, consistent with other ergodic controllers in the literature~\cite{seewald2024energy,calinon2020mixture,dong2023time}. 
 
 Fig.~\ref{fig:1} presents the results for the simulated forest at distinct time steps. Fig.~\ref{fig:1-1} shows the trajectory (on the right) after 1000 time steps. The starting point is represented by the gray square. The history is illustrated with a dark red line, and the current point is marked by a dark red dot. The top-left of the figure depicts the underlying information density distribution (i.e., the AGMM from Definition~\ref{def:movement}), including a detail of the five Gaussian components in the area representing the current history interval. The optimal values of the Gaussian centers $\boldsymbol{\mu}$ and the mixing coefficients $\boldsymbol{\alpha}$ ensure that the AGMM represents the history (i.e., the expected value and covariance of the trajectory over the current history window) while minimizing deviation to avoid obstacles. The bottom-left of the figure displays the coverage map, where each square counts the number of points within it at a given time.
 
@@ -389,15 +393,15 @@ Fig.~\ref{fig:1-3} shows the trajectory at time instant 10~000. As with the prev
 
 \subsection{Obstacle avoidance vs. coverage}\label{sec:res2}
 \noindent
-The OCP formulated in Eq.~(\ref{eq:ocp}) may not always yield an optimal solution. In such cases, our algorithm provides a sub-optimal solution where the constraint in Eq.~(\ref{eq:const}) may not be fully respected. For example, in the simulated trees scenario described in Sec.~\ref{sec:res1}, obstacles may not be avoided within the desired threshold. We observed this behavior during the initial iterations of our adaptive ergodic methodology. However, by tuning our approach using the concept of history $h$, we can improve obstacle avoidance as a by-product of our method.
+The OCP formulated in Eq.~(\ref{eq:ocp}) may not always yield an optimal solution. In such cases, our algorithm provides a sub-optimal solution where the constraint in Eq.~(\ref{eq:const}) may not be fully respected. For example, in the simulated trees scenario described in Sec.~\ref{sec:res1}, obstacles may not be avoided within the desired threshold. We observed this behavior during the initial iterations of our adaptive ergodic methodology. However, by tuning our approach using the concept of history $h$, we can improve obstacle avoidance as a by-product of our approach.
 
 Fig.~\ref{fig:0} presents our experimental results, highlighting the trade-offs between built-in obstacle avoidance capabilities and coverage, along with a collision metric. The collision metric $c_e$ is designed to count every occurrence where a point violates the constraint in Eq.~(\ref{eq:const}) within a given threshold. The count of violations is shown on the left y-axis of the figure. With a horizon set to 50~000, the invalidation ratio for a history window of zero is only 0.044\%, whereas it increases to 0.46\% for a history window of 1000. The threshold for invalidation is set to 60 centimeters. Coverage is calculated as described in Sec.~\ref{sec:res1}. Note that full coverage is not achieved since \textit{obstacles are included in the overall coverage metric}.
 
 The top of the figure shows the three metrics on a logarithmic scale. We observed that a history window of 100 provides the best trade-off between obstacle avoidance (0.14\%) and coverage metrics. The bottom of the figure displays a detailed view of the history window around 100, $\pm$25.
 
-Fig.~\ref{fig:time-vs-cov} shows the evolution over coverage in time for all the history windows in Fig.~\ref{fig:0}. Larger history windows tend to have a lower initial coverage as more trajectort hisory data have are processed to derive the adaptive ergodic controller, but they eventually lead to a more stable coverage rate as the exploration continues. The figure furthermore shows that the variance in coverage decreases over time, particularly for larger history windows.
+Fig.~\ref{fig:time-vs-cov} shows the evolution over coverage in time for all the history windows in Fig.~\ref{fig:0}. Larger history windows tend to have a lower initial coverage as more trajectory history data are processed to derive the adaptive ergodic controller, but they eventually lead to a more stable coverage rate as the exploration continues. The figure furthermore shows that the variance in coverage decreases over time, particularly for larger history windows.%Larger history windows tend to have a lower initial coverage as more trajectort hisory data have are processed to derive the adaptive ergodic controller, but they eventually lead to a more stable coverage rate as the exploration continues. The figure furthermore shows that the variance in coverage decreases over time, particularly for larger history windows.
 
-The data demonstrate that our method inherently incorporates a tunable degree of obstacle avoidance. However, in practice, even low collision rates could lead to mission-critical failures. It is thus noted that our method still requires an external obstacle avoidance methodology in use cases where collisions lead to critical failures. 
+The data demonstrate that our approach inherently incorporates a tunable degree of obstacle avoidance. However, in practice, even low collision rates could lead to mission-critical failures. It is thus noted that our approach still requires an external obstacle avoidance methodology in use cases where collisions lead to critical failures. 
 Nonetheless, compared to other methods in the literature, our approach maintains optimality (ergodicity) across the majority of the state space, while \textit{reducing} the reliance on external obstacle avoidance techniques.
 %Nonetheless, compared to other methods in the literature, our approach maintains optimality (ergodicity) across the majority of the state space, thereby \textit{significantly reducing} the reliance on external obstacle avoidance techniques.
 
@@ -405,7 +409,15 @@ Nonetheless, compared to other methods in the literature, our approach maintains
 \noindent
 Comparative results are conducted against an existing ergodic controller in the literature to highlight the similarities between the derived information measure (ours) and the underlying information measure (literature). The underlying information measure (Fig.~5 in~\cite{calinon2020mixture}) is modified so that the resulting ergodic trajectory remains in areas with low information measure, enabling a quantitative comparison.
 
-The left-most figure in Fig.~\ref{fig:c} illustrates the results as reported by~\cite{calinon2020mixture} using a coverage map, where each square represents the number of points within it at a given time. Darker squares indicate areas where the controller spends more time, while lighter squares correspond to areas where the controller spends less time (see Sec.~\ref{sec:res1}). The adaptive ergodic controller is then illustrated on the right, with different history windows A--F. Note that the adaptive ergodic controller is constructed without an underlying information measure. Instead, the original underlying distribution measure is treated as two unknown obstacles, each ``discovered'' when the controller comes into each obstacle's proximity. History windows A--C illustrate the evolution of coverage with a history window of 50$\pm$25. The reported coverage is then 25.74\%, 27.41\%, and 30.89\% for A, B, and C. D--F illustrate the evolution of coverage with a history window of 200$\pm$100. The reported coverage is then 20.39\%, 20.74\%, and 20.01\% for D, E, and F. The history windows A--D all show relative high similarities with~\cite{calinon2020mixture}.
+The left-most figure in Fig.~\ref{fig:c} illustrates the results as reported by~\cite{calinon2020mixture} using a coverage map, where each square represents the number of points within it at a given time. Darker squares indicate areas where the controller spends more time, while lighter squares correspond to areas where the controller spends less time (see Sec.~\ref{sec:res1}). The adaptive ergodic controller is then illustrated on the right, with different history windows A--F. Note that the adaptive ergodic controller is constructed without an underlying information measure. Instead, the original underlying distribution measure is treated as two unknown obstacles, each ``discovered'' when the controller comes into each obstacle's proximity. History windows A--C illustrate the evolution of coverage with a history window of 50$\pm$25. The reported coverage is then 25.74\%, 27.41\%, and 30.89\% for A, B, and C. D--F illustrate the evolution of coverage with a history window of 200$\pm$100. The reported coverage is then 20.39\%, 20.74\%, and 20.01\% for D, E, and F. %The history windows A--D all show relatively high similarities with~\cite{calinon2020mixture}.
+
+\subsection{Outdoor model}\label{sec:res3}
+\noindent
+Additional experimental evaluation is conducted using a model of an outdoor vegetated area located in Birmensdorf, ZH, Switzerland, with coordinates 47.362646\textdegree~latitude and 8.457228\textdegree~longitude. The area was selected to include dense vegetation, simulating a real-world use case for our general adaptive ergodic controller. The exploration area is bounded to 1 hectare, %10~000 square meters, 
+and the surrounding region has been manually surveyed to assess future feasibility.
+
+
+Fig.~\ref{fig:2} illustrates the path taken, with the history represented by the dark red line and the current point marked by the dark red dot. The history is set to 150 time steps, and the dynamics in Eq.~(\ref{eq:dyn}) are adjusted to reasonably model a DJI (R) Mavic 3 UAV. The history is chosen to ensure obstacle avoidance, allowing the UAV to navigate within the vegetation while avoiding tree trunks.
 
 \begin{figure}[b!]
   \begin{minipage}[t!]{.66\columnwidth}
@@ -414,25 +426,17 @@ The left-most figure in Fig.~\ref{fig:c} illustrates the results as reported by~
   \end{minipage}\hspace*{.15cm}
   \begin{minipage}[t!]{.31\columnwidth}
     \caption[.]{\textbf{Outdoor model of a large-scale vegetated~area featuring our ergodic controller}. The~figure illustrates the UAV's trajectory over 10~000 square-meter 
-    area located in Birmensdorf,~Switzerland. The~area features dense vegetation in an agricultural field. The dark red line represents the exploration history, while the dark red dot marks the~~UAV's~~current position. The prob- 
+    area located in Birmensdorf,~Switzerland. The~area features dense vegetation. The dark red line represents the exploration history, while the dark red dot marks the~~UAV's~~current position. The prob- 
     }
     \vspace*{-.2cm}
     \label{fig:2}
   \end{minipage}
-  \vspace*{-.18cm}
+  \vspace*{-.32cm}
   \caption*{\footnotesize lem is posed so that the modeled UAV operates at an altitude of 2.5 meters, avoiding tree trunks but not smaller bushes. The dynamics are adjusted to reflect real-world conditions, with the exploration history set to 150 time steps.}
 \end{figure}
 
-\subsection{Outdoor model}\label{sec:res3}
-\noindent
-Additional experimental evaluation is conducted using a model of an outdoor vegetated area located in Birmensdorf, ZH, Switzerland, with coordinates 47.362646\textdegree~latitude and 8.457228\textdegree~longitude. The area was selected to include dense vegetation in an agricultural field, simulating a real-world use case for our general adaptive ergodic controller. The exploration area is bounded to 1 hectare, %10~000 square meters, 
-and the surrounding region has been manually surveyed to assess future feasibility.
-
-
-Fig.~\ref{fig:2} illustrates the path taken, with the history represented by the dark red line and the current point marked by the dark red dot. The history is set to 150 time steps, and the dynamics in Eq.~(\ref{eq:dyn}) are adjusted to reasonably model a DJI (R) Mavic 3 UAV. The history is chosen to ensure obstacle avoidance, allowing the UAV to navigate within the vegetation while avoiding tree trunks.
-
-%Physical experimental evaluation was performed on an initial segment of the overall trajectory to assess the future applicability of the method to real-world use cases. However, the actual path is derived from \textsc{Matlab} (R). 
-A preliminary physical evaluation was performed by manually setting the UAV along a subset of the planned waypoints, to assess the feasibility of the method for real-world use cases. The trajectory shown in Fig.~\ref{fig:2}, however, corresponds to the computed path from \textsc{Matlab} (R). 
+%Physical experimental evaluation was performed on an initial segment of the overall trajectory to assess the future applicability of the method to real-world use cases. However, the actual path is derived from \textsc{Matlab} (R). F
+A preliminary physical evaluation was performed by manually setting the UAV along a subset of the planned waypoints to assess the feasibility of the method for real-world use cases. The trajectory shown in Fig.~\ref{fig:2}, however, corresponds to the computed path from \textsc{Matlab} (R). 
 Further physical evaluation is ongoing (see Sec.~\ref{sec:conc}). Exploratory trajectories are imported into the UAV's flight controller using waypoints managed by proprietary software; compatibility with other software and flight controllers is also supported. Data are reported after a horizon of 5000 time steps. The obstacles are positioned in the model so that the UAV operates within the canopy at an altitude of 2.5 meters, excluding small bushes but including tree trunks. The UAV's velocity in the model is set to 1.5 meters per second.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -442,7 +446,7 @@ This paper addresses the problem of robotic exploration using ergodic control, o
 A notable difference from previous work in ergodic control is that we \textit{do not require an a priori user-defined information measure}, making our approach suited for exploration in unknown outdoor environments.
 
 
-Our experimental results are conducted in various simulated and real-world environments, including a forest and dense vegetation in an agricultural field. The experiments highlight a balance between coverage efficiency and obstacle avoidance, with trade-offs being determined by the size of the history window, which is a given parameter that can be set depending on the desired value of coverage/obstacle avoidance. Comparative evaluation has been conducted against an existing ergodic controller in the literature and show that similar results are achieved. However, the existing ergodic controller requires an underlying information measure, whereas ours does not. Physical evaluation has been performed on an initial portion of the trajectory, and further physical experiments are ongoing: we are extending the results to a real-world agricultural use case, where ergodic controllers assist in detecting target species (i.e., pests and pathogens). Future work will focus on refining the physical experiments and integrating with a more varied range of flight controllers, aiming to improve long-term exploration capabilities. This includes employing energy-aware ergodic controllers %~\cite{seewald2024energy,naveed2024eclares} 
+Our experimental results are conducted in various simulated and real-world environments, including a forest and dense vegetation. The experiments highlight a balance between coverage efficiency and obstacle avoidance, with trade-offs being determined by the size of the history window, which is a given parameter that can be set depending on the desired value of coverage/obstacle avoidance. Comparative evaluation has been conducted against an existing ergodic controller in the literature and shows that similar results are achieved. However, the existing ergodic controller requires an underlying information measure, whereas ours does not. Physical evaluation has been performed on an initial portion of the trajectory, and further physical experiments are ongoing: we are extending the results to a real-world agricultural use case, where ergodic controllers assist in detecting target species (i.e., pests and pathogens). Future work will focus on refining the physical experiments and integrating with a more varied range of flight controllers, aiming to improve long-term exploration capabilities. This includes employing energy-aware ergodic controllers %~\cite{seewald2024energy,naveed2024eclares} 
 and addressing planning and scheduling trade-offs for more specialized coverage use cases.%~\cite{seewald2022energy,seewaldphdthesis}.
 
 
